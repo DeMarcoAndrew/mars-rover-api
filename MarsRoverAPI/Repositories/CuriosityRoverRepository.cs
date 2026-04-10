@@ -31,7 +31,7 @@ namespace MarsRoverAPI.Repositories
                     if (per_page.HasValue)
                         queryParams.Add($"per_page={per_page.Value}");
 
-                    queryString = "?" + string.Join("&", queryParams);
+                    queryString = "&" + string.Join("&", queryParams);
                 }
 
                 return await client.GetFromJsonAsync<Root>(_curiosityRoverBaseUrl + queryString) ?? throw new Exception();
