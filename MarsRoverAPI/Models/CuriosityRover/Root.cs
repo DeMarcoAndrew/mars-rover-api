@@ -3,5 +3,5 @@ using MarsRoverAPI.ModelBase.Models;
 
 namespace MarsRoverAPI.CuriosityRover.Models
 {
-    public class Root : RootBase<Image> { }
+    public class Root : RootBase<Image<ImageFiles, Camera>> { }
 }

@@ -9,6 +9,6 @@ namespace MarsRoverAPI.PerseveranceRover.Models
         public string? CameraVector { get; set; }
 
         [JsonPropertyName("camera_position")]
-        public string CameraPosition { get; set; }
+        public string? CameraPosition { get; set; }
     }
 }
