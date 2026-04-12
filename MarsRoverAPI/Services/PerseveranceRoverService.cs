@@ -11,7 +11,7 @@ namespace MarsRoverAPI.Services
             _marsAPIRepository = marsAPIRepository;
         }
 
-        public async Task<PerseveranceRover.Models.Root> GetCuriosityRoverDataAsync(string apiPath, int? sol = null, int? page = null, int? per_page = null)
+        public async Task<PerseveranceRover.Models.Root> GetPerseveranceRoverDataAsync(string apiPath, int? sol = null, int? page = null, int? per_page = null)
         {
             return await _marsAPIRepository.GetMarsAPIDataAsync(apiPath, sol.Value, page, per_page);
         }

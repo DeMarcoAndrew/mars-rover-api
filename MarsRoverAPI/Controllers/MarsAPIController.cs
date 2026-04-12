@@ -8,11 +8,13 @@ namespace MarsRoverAPI.Controllers
     public class MarsAPIController : ControllerBase
     {
 
-        private IMarsAPIService _marsAPIService;
+        private ICuriosityRoverService _curiosityRoverService;
+        private IPerseveranceRoverService _perseveranceRoverService;
 
-        public MarsAPIController(IMarsAPIService p_MarsAPIService)
+        public MarsAPIController(ICuriosityRoverService p_CuriosityRoverService, IPerseveranceRoverService p_PerseveranceRoverService)
         {
-            _marsAPIService = p_MarsAPIService;
+            _curiosityRoverService = p_CuriosityRoverService;
+            _perseveranceRoverService = p_PerseveranceRoverService;
         }
  
         [HttpGet("curiosity")]
@@ -24,7 +26,7 @@ namespace MarsRoverAPI.Controllers
         {
             try
             {
-                return Ok(await _marsAPIService.GetCuriosityRoverDataAsync(MarsAPIConstants.CuriosityRoverPath, sol, page, per_page));
+                return Ok(await _curiosityRoverService.GetCuriosityRoverDataAsync(MarsAPIConstants.CuriosityRoverPath, sol, page, per_page));
             }
             catch (Exception ex)
             {
@@ -41,7 +43,7 @@ namespace MarsRoverAPI.Controllers
         {
             try
             {
-                return Ok(await _marsAPIService.GetPerserveranceRoverDataAsync(MarsAPIConstants.PerseveranceRoverPath, sol, page, per_page));
+                return Ok(await _perseveranceRoverService.GetPerseveranceRoverDataAsync(MarsAPIConstants.PerseveranceRoverPath, sol, page, per_page));
             }
             catch (Exception ex)
             {
@@ -49,21 +51,21 @@ namespace MarsRoverAPI.Controllers
             }
         }
 
-        [HttpGet("insight")]
-        public async Task<IActionResult> GetInSightLanderData(
-            [FromQuery] int? sol = null, 
-            [FromQuery] int? page = null, 
-            [FromQuery] int? per_page = null
-        )
-        {
-            try
-            {
-                return Ok(await _marsAPIService.GetInSightLanderDataAsync(MarsAPIConstants.InSightLanderPath, sol, page, per_page));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "Error! " + ex.Message);
-            }
-        }
+        // [HttpGet("insight")]
+        // public async Task<IActionResult> GetInSightLanderData(
+        //     [FromQuery] int? sol = null, 
+        //     [FromQuery] int? page = null, 
+        //     [FromQuery] int? per_page = null
+        // )
+        // {
+        //     try
+        //     {
+        //         return Ok(await _marsAPIService.GetInSightLanderDataAsync(MarsAPIConstants.InSightLanderPath, sol, page, per_page));
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         return StatusCode(500, "Error! " + ex.Message);
+        //     }
+        // }
     }
 }
