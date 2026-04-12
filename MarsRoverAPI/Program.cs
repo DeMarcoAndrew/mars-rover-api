@@ -4,7 +4,7 @@ using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var marsRoverBaseUrl = builder.Configuration.GetSection("ExternalServices:CuriosityRoverService:BaseUrl").Value;
+var marsRoverBaseUrl = builder.Configuration.GetSection("ExternalServices:NASAMarsAPIService:BaseUrl").Value;
 
 builder.Services.AddOpenApi();
 
