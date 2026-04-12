@@ -26,9 +26,7 @@ namespace MarsRoverAPI.Services
                 long randomTicks = (long)(Random.Shared.NextDouble() * dateRange);
                 DateTime randomDate = new DateTime(curiosityLandDate.Ticks + randomTicks, DateTimeKind.Utc);
 
-                var marsSolDate = DateCalculator.GetMarsSolDate(randomDate);
-
-                sol = (int)Math.Floor(marsSolDate);
+                sol = (int)DateCalculator.CalculateCuriositySol(randomDate);
             }
             return await _marsAPIRepository.GetMarsAPIDataAsync(apiPath, sol.Value, page, per_page);
         }
