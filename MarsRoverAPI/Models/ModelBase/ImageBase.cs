@@ -11,13 +11,13 @@ namespace MarsRoverAPI.ModelBase.Models
         public string? Attitude { get; set; }
 
         [JsonPropertyName("image_files")]
-        public ImageFiles? ImageFiles { get; set; }
+        public ImageFilesBase? ImageFiles { get; set; }
 
         [JsonPropertyName("imageid")]
         public string? ImageId { get; set; }
 
         [JsonPropertyName("camera")]
-        public Camera? Camera { get; set; }
+        public CameraBase? Camera { get; set; }
 
         [JsonPropertyName("caption")]
         public string? Caption { get; set; }
