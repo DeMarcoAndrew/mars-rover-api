@@ -4,9 +4,9 @@ namespace MarsRoverAPI.Repositories
     {
         private readonly HttpClient _httpClient;
 
-        public MarsAPIRepository(HttpClient httpClient)
+        public MarsAPIRepository(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("MarsAPI");
         }
 
         public async Task<T> GetMarsAPIDataAsync(string apiPath, int sol, int? page = null, int? per_page = null)
@@ -31,7 +31,7 @@ namespace MarsRoverAPI.Repositories
             }
             catch (Exception ex)
             {
-                throw new Exception("An unexpected error occurred while fetching data from the MarsRover Rover API.", ex);
+                throw new Exception(ex.StackTrace);
             }     
         }
     }
