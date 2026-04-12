@@ -1,19 +1,18 @@
 using MarsRoverAPI.Calculators;
-using MarsRoverAPI.Models;
 using MarsRoverAPI.Repositories;
 
 namespace MarsRoverAPI.Services
 {
-    public class MarsAPIService : IMarsAPIService
+    public class CuriosityRoverService : ICuriosityRoverService
     {
-        private IMarsAPIRepository _marsAPIRepository;
+        private IMarsAPIRepository<CuriosityRover.Models.Root> _marsAPIRepository;
 
-        public MarsAPIService(IMarsAPIRepository MarsAPIRepository)
+        public CuriosityRoverService(IMarsAPIRepository<CuriosityRover.Models.Root> marsAPIRepository)
         {
-            _marsAPIRepository = MarsAPIRepository;
+            _marsAPIRepository = marsAPIRepository;
         }
 
-        public async Task<Root> GetCuriosityRoverDataAsync(string apiPath, int? sol = null, int? page = null, int? per_page = null)
+        public async Task<CuriosityRover.Models.Root> GetCuriosityRoverDataAsync(string apiPath, int? sol = null, int? page = null, int? per_page = null)
         {
             if (!sol.HasValue)
             {
@@ -31,17 +30,6 @@ namespace MarsRoverAPI.Services
 
                 sol = (int)Math.Floor(marsSolDate);
             }
-
-            return await _marsAPIRepository.GetMarsAPIDataAsync(apiPath, sol.Value, page, per_page);
-        }
-
-        public async Task<Root> GetPerserveranceRoverDataAsync(string apiPath, int? sol = null, int? page = null, int? per_page = null)
-        {
-            return await _marsAPIRepository.GetMarsAPIDataAsync(apiPath, sol.Value, page, per_page);
-        }
-        
-        public async Task<Root> GetInSightLanderDataAsync(string apiPath, int? sol = null, int? page = null, int? per_page = null)
-        {
             return await _marsAPIRepository.GetMarsAPIDataAsync(apiPath, sol.Value, page, per_page);
         }
     }

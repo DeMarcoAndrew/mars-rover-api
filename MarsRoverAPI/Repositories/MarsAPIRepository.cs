@@ -1,22 +1,18 @@
-using MarsRoverAPI.Models;
-
 namespace MarsRoverAPI.Repositories
 {
-    public class MarsAPIRepository : IMarsAPIRepository
+    public class MarsAPIRepository<T> : IMarsAPIRepository<T> where T : class
     {
-        private readonly string _marsRoverBaseUrl;
+        private readonly HttpClient _httpClient;
 
-        public MarsAPIRepository(string MarsRoverBaseUrl)
+        public MarsAPIRepository(HttpClient httpClient)
         {
-            _marsRoverBaseUrl = MarsRoverBaseUrl;
+            _httpClient = httpClient;
         }
 
-        public async Task<Root> GetMarsAPIDataAsync(string apiPath, int sol, int? page = null, int? per_page = null)
+        public async Task<T> GetMarsAPIDataAsync(string apiPath, int sol, int? page = null, int? per_page = null)
         {
             try 
             {
-                using HttpClient client = new HttpClient();
-
                 var queryString = string.Empty;
 
                 var queryParams = new List<string> { $"sol={sol}" };
@@ -31,7 +27,7 @@ namespace MarsRoverAPI.Repositories
                 
                 queryString = "&" + string.Join("&", queryParams);
 
-                return await client.GetFromJsonAsync<Root>(_marsRoverBaseUrl + apiPath + queryString) ?? throw new Exception();
+                return await _httpClient.GetFromJsonAsync<T>(apiPath + queryString) ?? throw new Exception();
             }
             catch (Exception ex)
             {

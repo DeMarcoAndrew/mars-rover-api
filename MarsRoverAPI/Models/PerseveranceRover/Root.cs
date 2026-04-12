@@ -1,7 +1,6 @@
-using System.Text.Json.Serialization;
 using MarsRoverAPI.ModelBase.Models;
 
-namespace MarsRoverAPI.CuriosityRover.Models
+namespace MarsRoverAPI.PerseveranceRover.Models
 {
     public class Root : RootBase<Image> { }
 }

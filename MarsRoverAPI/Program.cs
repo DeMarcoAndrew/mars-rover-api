@@ -11,8 +11,14 @@ builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddScoped<IMarsAPIRepository>(repo => new MarsAPIRepository(marsRoverBaseUrl ?? throw new Exception("Error! Mars Rover Base URL is not configured.")));
-builder.Services.AddScoped<IMarsAPIService, MarsAPIService>();
+builder.Services.AddHttpClient<IMarsAPIRepository<object>, MarsAPIRepository<object>>(client =>
+{
+    client.BaseAddress = new Uri(marsRoverBaseUrl ?? throw new Exception("ERROR! Mars Rover Base URL was NULL."));
+});
+
+builder.Services.AddScoped(typeof(IMarsAPIRepository<>), typeof(MarsAPIRepository<>));
+builder.Services.AddScoped<ICuriosityRoverService, CuriosityRoverService>();
+builder.Services.AddScoped<IPerseveranceRoverService, PerseveranceRoverService>();
 
 var app = builder.Build();
 

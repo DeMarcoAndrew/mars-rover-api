@@ -2,13 +2,13 @@ using System.Text.Json.Serialization;
 
 namespace MarsRoverAPI.ModelBase.Models
 {
-    public class RootBase
+    public class RootBase<T>
     {
         [JsonPropertyName("sol")]
         public int? Sol { get; set; }
 
         [JsonPropertyName("images")]
-        public List<Image?>? Images { get; set; }
+        public List<T?>? Images { get; set; }
 
         [JsonPropertyName("num_images")]
         public int? NumImages { get; set; }

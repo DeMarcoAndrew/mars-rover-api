@@ -1,9 +1,7 @@
-using MarsRoverAPI.Models;
-
 namespace MarsRoverAPI.Repositories
 {
-    public interface IMarsAPIRepository
+    public interface IMarsAPIRepository<T> where T : class
     {
-        public Task<Root> GetMarsAPIDataAsync(string apiPath, int sol, int? page = null, int? per_page = null);
+        public Task<T> GetMarsAPIDataAsync(string apiPath, int sol, int? page = null, int? per_page = null);
     }
 }
