@@ -20,7 +20,7 @@ namespace MarsRoverAPI.Controllers
         [HttpGet("curiosity")]
         public async Task<IActionResult> GetCuriosityRoverData(
             [FromQuery] int? sol = null,
-            [FromQuery] DateTime? earth_date = null,
+            [FromQuery] string? earth_date = null,
             [FromQuery] bool? latest = null,
             [FromQuery] int? page = null, 
             [FromQuery] int? per_page = null
@@ -28,7 +28,14 @@ namespace MarsRoverAPI.Controllers
         {
             try
             {
-                return Ok(await _curiosityRoverService.GetCuriosityRoverDataAsync(MarsAPIConstants.CuriosityRoverPath, sol, earth_date, latest, page, per_page));
+                DateTime? earthDate = null;
+
+                if (!string.IsNullOrWhiteSpace(earth_date))
+                {
+                    earthDate = DateTime.ParseExact(earth_date, "MM-dd-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                }
+
+                return Ok(await _curiosityRoverService.GetCuriosityRoverDataAsync(MarsAPIConstants.CuriosityRoverPath, sol, earthDate, latest, page, per_page));
             }
             catch (Exception ex)
             {
