@@ -4,16 +4,15 @@ using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var curiosityRoverBaseUrl = builder.Configuration.GetSection("ExternalServices:CuriosityRoverService:BaseUrl").Value;
-var perseveranceRoverBaseUrl = builder.Configuration.GetSection("ExternalServices:PerseveranceRoverService:BaseUrl").Value;
+var marsRoverBaseUrl = builder.Configuration.GetSection("ExternalServices:CuriosityRoverService:BaseUrl").Value;
 
 builder.Services.AddOpenApi();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddScoped<ICuriosityRoverRepository>(repo => new CuriosityRoverRepository(curiosityRoverBaseUrl ?? throw new Exception("Error! Curiosity Rover Base URL is not configured.")));
-builder.Services.AddScoped<ICuriosityRoverService, CuriosityRoverService>();
+builder.Services.AddScoped<IMarsAPIRepository>(repo => new MarsAPIRepository(marsRoverBaseUrl ?? throw new Exception("Error! Mars Rover Base URL is not configured.")));
+builder.Services.AddScoped<IMarsAPIService, MarsAPIService>();
 
 var app = builder.Build();
 

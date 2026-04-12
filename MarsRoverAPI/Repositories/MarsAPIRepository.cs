@@ -1,18 +1,17 @@
-using System.Text.Json;
 using MarsRoverAPI.Models;
 
 namespace MarsRoverAPI.Repositories
 {
-    public class CuriosityRoverRepository : ICuriosityRoverRepository
+    public class MarsAPIRepository : IMarsAPIRepository
     {
-        private readonly string _curiosityRoverBaseUrl;
+        private readonly string _marsRoverBaseUrl;
 
-        public CuriosityRoverRepository(string curiosityRoverBaseUrl)
+        public MarsAPIRepository(string MarsRoverBaseUrl)
         {
-            _curiosityRoverBaseUrl = curiosityRoverBaseUrl;
+            _marsRoverBaseUrl = MarsRoverBaseUrl;
         }
 
-        public async Task<Root> GetCuriosityRoverDataAsync(int? sol = null, int? page = null, int? per_page = null)
+        public async Task<Root> GetMarsAPIDataAsync(string apiPath, int? sol = null, int? page = null, int? per_page = null)
         {
             try 
             {
@@ -34,11 +33,11 @@ namespace MarsRoverAPI.Repositories
                     queryString = "&" + string.Join("&", queryParams);
                 }
 
-                return await client.GetFromJsonAsync<Root>(_curiosityRoverBaseUrl + queryString) ?? throw new Exception();
+                return await client.GetFromJsonAsync<Root>(_marsRoverBaseUrl + apiPath + queryString) ?? throw new Exception();
             }
             catch (Exception ex)
             {
-                throw new Exception("An unexpected error occurred while fetching data from the Curiosity Rover API.", ex);
+                throw new Exception("An unexpected error occurred while fetching data from the MarsRover Rover API.", ex);
             }     
         }
     }
