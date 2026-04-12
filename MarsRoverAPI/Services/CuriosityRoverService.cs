@@ -12,9 +12,10 @@ namespace MarsRoverAPI.Services
             _marsAPIRepository = marsAPIRepository;
         }
 
-        public async Task<CuriosityRover.Models.Root> GetCuriosityRoverDataAsync(string apiPath, int? sol = null, int? page = null, int? per_page = null)
+        public async Task<CuriosityRover.Models.Root> GetCuriosityRoverDataAsync(string apiPath, int? sol = null, DateTime? earth_date = null, bool? latest = null, int? page = null, int? per_page = null)
         {
-            if (!sol.HasValue)
+            //Get a random sol date if all 3 params have no value
+            if (!sol.HasValue && !earth_date.HasValue && !latest.HasValue)
             {
                 DateTime curiosityLandDate = DateTime.Parse("2012-08-06T05:17:00Z", null, System.Globalization.DateTimeStyles.RoundtripKind);
 
@@ -28,6 +29,17 @@ namespace MarsRoverAPI.Services
 
                 sol = (int)DateCalculator.CalculateCuriositySol(randomDate);
             }
+            else if (!sol.HasValue && earth_date.HasValue)
+            {
+                sol = (int)DateCalculator.CalculateCuriositySol(earth_date.Value);
+            }
+            else if (!sol.HasValue && latest.HasValue)
+            {
+                //https://mars.nasa.gov/api/v1/raw_image_items/msl/latest/
+
+                //Grab latest sols from endpoint above and set sol value equal to that latest sol
+            }
+
             return await _marsAPIRepository.GetMarsAPIDataAsync(apiPath, sol.Value, page, per_page);
         }
     }

@@ -19,14 +19,16 @@ namespace MarsRoverAPI.Controllers
  
         [HttpGet("curiosity")]
         public async Task<IActionResult> GetCuriosityRoverData(
-            [FromQuery] int? sol = null, 
+            [FromQuery] int? sol = null,
+            [FromQuery] DateTime? earth_date = null,
+            [FromQuery] bool? latest = null,
             [FromQuery] int? page = null, 
             [FromQuery] int? per_page = null
         )
         {
             try
             {
-                return Ok(await _curiosityRoverService.GetCuriosityRoverDataAsync(MarsAPIConstants.CuriosityRoverPath, sol, page, per_page));
+                return Ok(await _curiosityRoverService.GetCuriosityRoverDataAsync(MarsAPIConstants.CuriosityRoverPath, sol, earth_date, latest, page, per_page));
             }
             catch (Exception ex)
             {
