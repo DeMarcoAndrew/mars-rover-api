@@ -11,7 +11,7 @@ namespace MarsRoverAPI.Repositories
             _marsRoverBaseUrl = MarsRoverBaseUrl;
         }
 
-        public async Task<Root> GetMarsAPIDataAsync(string apiPath, int? sol = null, int? page = null, int? per_page = null)
+        public async Task<Root> GetMarsAPIDataAsync(string apiPath, int sol, int? page = null, int? per_page = null)
         {
             try 
             {
@@ -19,19 +19,17 @@ namespace MarsRoverAPI.Repositories
 
                 var queryString = string.Empty;
 
-                if (sol.HasValue || page.HasValue || per_page.HasValue)
-                {
-                    var queryParams = new List<string>();
+                var queryParams = new List<string> { $"sol={sol}" };
 
-                    if (sol.HasValue)
-                        queryParams.Add($"sol={sol.Value}");
+                if (page.HasValue || per_page.HasValue)
+                {
                     if (page.HasValue)
                         queryParams.Add($"page={page.Value}");
                     if (per_page.HasValue)
                         queryParams.Add($"per_page={per_page.Value}");
-
-                    queryString = "&" + string.Join("&", queryParams);
                 }
+                
+                queryString = "&" + string.Join("&", queryParams);
 
                 return await client.GetFromJsonAsync<Root>(_marsRoverBaseUrl + apiPath + queryString) ?? throw new Exception();
             }
