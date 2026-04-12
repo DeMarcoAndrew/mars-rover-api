@@ -15,7 +15,7 @@ namespace MarsRoverAPI.Services
 
         public async Task<Root> GetCuriosityRoverDataAsync(string apiPath, int? sol = null, int? page = null, int? per_page = null)
         {
-            if(!sol.HasValue)
+            if (!sol.HasValue)
             {
                 DateTime curiosityLandDate = DateTime.Parse("2012-08-06T05:17:00Z", null, System.Globalization.DateTimeStyles.RoundtripKind);
 
@@ -29,9 +29,19 @@ namespace MarsRoverAPI.Services
 
                 var marsSolDate = DateCalculator.GetMarsSolDate(randomDate);
 
-                sol = (int)Math.Floor(marsSolDate);  
+                sol = (int)Math.Floor(marsSolDate);
             }
 
+            return await _marsAPIRepository.GetMarsAPIDataAsync(apiPath, sol.Value, page, per_page);
+        }
+
+        public async Task<Root> GetPerserveranceRoverDataAsync(string apiPath, int? sol = null, int? page = null, int? per_page = null)
+        {
+            return await _marsAPIRepository.GetMarsAPIDataAsync(apiPath, sol.Value, page, per_page);
+        }
+        
+        public async Task<Root> GetInSightLanderDataAsync(string apiPath, int? sol = null, int? page = null, int? per_page = null)
+        {
             return await _marsAPIRepository.GetMarsAPIDataAsync(apiPath, sol.Value, page, per_page);
         }
     }

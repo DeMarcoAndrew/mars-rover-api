@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace MarsRoverAPI.Models
+namespace MarsRoverAPI.ModelBase.Models
 {
-    public class Camera
+    public class CameraBase
     {
         [JsonPropertyName("filter_name")]
         public string? FilterName { get; set; }

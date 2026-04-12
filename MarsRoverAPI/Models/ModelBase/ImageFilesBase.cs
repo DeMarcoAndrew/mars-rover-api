@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace MarsRoverAPI.Models
+namespace MarsRoverAPI.ModelBase.Models
 {
-    public class ImageFiles
+    public class ImageFilesBase
     {
         [JsonPropertyName("medium")]
         public string? Medium { get; set; }

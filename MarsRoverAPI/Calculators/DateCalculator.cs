@@ -4,9 +4,9 @@ namespace MarsRoverAPI.Calculators
     {
         public static double GetMarsSolDate(DateTime utcDate)
         {
-            double julianDate = utcDate.ToUniversalTime().ToOADate() + 2415018.5;
+            double julianDate = utcDate.ToOADate() + 2415018.5;
 
-            return (julianDate - 2405522.00331) / 1.02749125;
+            return (julianDate - 2451549.5) / 1.0274912517 + 44796.0;
         }
     }
 }

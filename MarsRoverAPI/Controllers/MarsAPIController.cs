@@ -41,8 +41,7 @@ namespace MarsRoverAPI.Controllers
         {
             try
             {
-                return NotFound();
-                //return Ok(await _marsAPIService.GetMarsAPIDataAsync(MarsAPIConstants.PerseveranceRoverPath, sol, page, per_page));
+                return Ok(await _marsAPIService.GetPerserveranceRoverDataAsync(MarsAPIConstants.PerseveranceRoverPath, sol, page, per_page));
             }
             catch (Exception ex)
             {
@@ -59,8 +58,7 @@ namespace MarsRoverAPI.Controllers
         {
             try
             {
-                return NotFound();
-                //return Ok(await _marsAPIService.GetMarsAPIDataAsync(MarsAPIConstants.InSightLanderPath, sol, page, per_page));
+                return Ok(await _marsAPIService.GetInSightLanderDataAsync(MarsAPIConstants.InSightLanderPath, sol, page, per_page));
             }
             catch (Exception ex)
             {

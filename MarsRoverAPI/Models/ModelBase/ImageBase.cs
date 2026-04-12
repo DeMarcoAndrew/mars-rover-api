@@ -1,14 +1,14 @@
 using System.Text.Json.Serialization;
 
-namespace MarsRoverAPI.Models
+namespace MarsRoverAPI.ModelBase.Models
 {
-    public class Image
+    public class ImageBase
     {
         [JsonPropertyName("sol")]
-        public int? sol { get; set; }
+        public int? Sol { get; set; }
 
         [JsonPropertyName("attitude")]
-        public string? attitude { get; set; }
+        public string? Attitude { get; set; }
 
         [JsonPropertyName("image_files")]
         public ImageFiles? ImageFiles { get; set; }

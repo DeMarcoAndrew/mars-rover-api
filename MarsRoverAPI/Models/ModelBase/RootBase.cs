@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace MarsRoverAPI.Models
+namespace MarsRoverAPI.ModelBase.Models
 {
-    public class Root
+    public class RootBase
     {
         [JsonPropertyName("sol")]
         public int? Sol { get; set; }
