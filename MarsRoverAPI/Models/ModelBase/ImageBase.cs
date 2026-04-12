@@ -46,9 +46,6 @@ namespace MarsRoverAPI.ModelBase.Models
         [JsonPropertyName("title")]
         public string? Title { get; set; }
 
-        [JsonPropertyName("site")]
-        public string? Site { get; set; }
-
         [JsonPropertyName("date_received")]
         public DateTime? DateReceived { get; set; }
     }

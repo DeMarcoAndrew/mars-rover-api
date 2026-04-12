@@ -7,5 +7,8 @@ namespace MarsRoverAPI.PerseveranceRover.Models
     {
         [JsonPropertyName("extended")]
         public Extended? Extended { get; set; }
+
+        [JsonPropertyName("site")]
+        public int? Site { get; set; }
     }
 }
