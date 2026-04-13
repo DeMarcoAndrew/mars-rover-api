@@ -1,3 +1,5 @@
+using MarsRoverAPI.Models.CuriosityRover;
+
 namespace MarsRoverAPI.Repositories
 {
     public class MarsAPIRepository<T> : IMarsAPIRepository<T> where T : class
@@ -28,6 +30,18 @@ namespace MarsRoverAPI.Repositories
                 queryString = "&" + string.Join("&", queryParams);
 
                 return await _httpClient.GetFromJsonAsync<T>(apiPath + queryString) ?? throw new Exception();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.StackTrace);
+            }     
+        }
+
+        public async Task<LatestDataRoot> GetLatestCuriosityRoverSolsAsync()
+        {
+            try 
+            {
+                return await _httpClient.GetFromJsonAsync<LatestDataRoot>(MarsAPIConstants.LatestCuriosityRoverSolsPath) ?? throw new Exception();
             }
             catch (Exception ex)
             {

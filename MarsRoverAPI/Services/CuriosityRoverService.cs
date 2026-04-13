@@ -5,14 +5,14 @@ namespace MarsRoverAPI.Services
 {
     public class CuriosityRoverService : ICuriosityRoverService
     {
-        private IMarsAPIRepository<CuriosityRover.Models.Root> _marsAPIRepository;
+        private IMarsAPIRepository<Models.CuriosityRover.Root> _marsAPIRepository;
 
-        public CuriosityRoverService(IMarsAPIRepository<CuriosityRover.Models.Root> marsAPIRepository)
+        public CuriosityRoverService(IMarsAPIRepository<Models.CuriosityRover.Root> marsAPIRepository)
         {
             _marsAPIRepository = marsAPIRepository;
         }
 
-        public async Task<CuriosityRover.Models.Root> GetCuriosityRoverDataAsync(string apiPath, int? sol = null, DateTime? earth_date = null, bool? latest = null, int? page = null, int? per_page = null)
+        public async Task<Models.CuriosityRover.Root> GetCuriosityRoverDataAsync(string apiPath, int? sol = null, DateTime? earth_date = null, bool? latest = null, int? page = null, int? per_page = null)
         {
             //Get a random sol date if all 3 params have no value
             if (!sol.HasValue && !earth_date.HasValue && !latest.HasValue)
@@ -35,9 +35,7 @@ namespace MarsRoverAPI.Services
             }
             else if (!sol.HasValue && latest.HasValue)
             {
-                //https://mars.nasa.gov/api/v1/raw_image_items/msl/latest/
-
-                //Grab latest sols from endpoint above and set sol value equal to that latest sol
+                var latestData = await _marsAPIRepository.GetLatestCuriosityRoverSolsAsync();
             }
 
             return await _marsAPIRepository.GetMarsAPIDataAsync(apiPath, sol.Value, page, per_page);

@@ -15,7 +15,7 @@ namespace MarsRoverAPI.Calculators
             
             double modifiedJulianDate = julianDate - 2400000.5;
             
-            // NASA's Formula: MarsSolDate = (ModifiedJulianDate - 51549.5) / 1.02749125 + 44796.0 - 0.00096
+            // NASA's Formula
             double msd = (modifiedJulianDate - 51549.5) / 1.02749125 + 44796.0 - 0.0009626;
             
             // Subtract Curiosity landing
