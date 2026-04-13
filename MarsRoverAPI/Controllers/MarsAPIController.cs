@@ -67,10 +67,10 @@ namespace MarsRoverAPI.Controllers
 
                 var imagesOnlyResult = size?.ToLower() switch
                 {
-                    "small" => result.Images.SelectMany(imgs => imgs.ImageFiles.Small).ToList(),
-                    "medium" => result.Images.SelectMany(imgs => imgs.ImageFiles.Medium).ToList(),
-                    "large" => result.Images.SelectMany(imgs => imgs.ImageFiles.Large).ToList(),
-                    _ => result.Images.SelectMany(imgs => imgs.ImageFiles.Large).ToList()
+                    "small" => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.Small).ToList(),
+                    "medium" => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.Medium).ToList(),
+                    "large" => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.Large).ToList(),
+                    _ => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.Large).ToList()
                 };
 
                 return Ok(imagesOnlyResult);
