@@ -1,3 +1,4 @@
+using MarsRoverAPI.Models.CuriosityRover;
 using MarsRoverAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,6 +37,43 @@ namespace MarsRoverAPI.Controllers
                 }
 
                 return Ok(await _curiosityRoverService.GetCuriosityRoverDataAsync(MarsAPIConstants.CuriosityRoverPath, sol, earthDate, latest, page, per_page));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error! " + ex.Message);
+            }
+        }
+
+        [HttpGet("curiosity/images")]
+        public async Task<IActionResult> GetCuriosityRoverImages(
+            [FromQuery] int? sol = null,
+            [FromQuery] string? earth_date = null,
+            [FromQuery] bool? latest = null,
+            [FromQuery] string? size = null,
+            [FromQuery] int? page = null, 
+            [FromQuery] int? per_page = null
+        )
+        {
+            try
+            {
+                DateTime? earthDate = null;
+
+                if (!string.IsNullOrWhiteSpace(earth_date))
+                {
+                    earthDate = DateTime.ParseExact(earth_date, "MM-dd-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                }
+
+                var result = await _curiosityRoverService.GetCuriosityRoverDataAsync(MarsAPIConstants.CuriosityRoverPath, sol, earthDate, latest, page, per_page);
+
+                var imagesOnlyResult = size?.ToLower() switch
+                {
+                    "small" => result.Images.SelectMany(imgs => imgs.ImageFiles.Small).ToList(),
+                    "medium" => result.Images.SelectMany(imgs => imgs.ImageFiles.Medium).ToList(),
+                    "large" => result.Images.SelectMany(imgs => imgs.ImageFiles.Large).ToList(),
+                    _ => result.Images.SelectMany(imgs => imgs.ImageFiles.Large).ToList()
+                };
+
+                return Ok(imagesOnlyResult);
             }
             catch (Exception ex)
             {
