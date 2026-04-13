@@ -36,6 +36,16 @@ namespace MarsRoverAPI.Services
             else if (!sol.HasValue && latest.HasValue)
             {
                 var latestData = await _marsAPIRepository.GetLatestCuriosityRoverSolsAsync();
+                if (latestData != null && latestData.Success.HasValue && latestData.Success.Value
+                    && latestData.LatestData?.LatestSols != null && latestData.LatestData.LatestSols.Count > 0)
+                {
+                    sol = latestData.LatestData.LatestSols.Max();
+                }
+            }
+
+            if (!sol.HasValue)
+            {
+                throw new InvalidOperationException("Unable to determine 'sol' value for Curiosity rover request.");
             }
 
             return await _marsAPIRepository.GetMarsAPIDataAsync(apiPath, sol.Value, page, per_page);

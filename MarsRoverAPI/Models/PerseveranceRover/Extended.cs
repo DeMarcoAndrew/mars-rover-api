@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace MarsRoverAPI.PerseveranceRover.Models
+namespace MarsRoverAPI.Models.PerseveranceRover
 {
-    public class Extended
+        public class Extended
     {
         [JsonPropertyName("mastAz")]
         public string? MastAz { get; set; }

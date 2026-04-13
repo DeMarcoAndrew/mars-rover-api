@@ -1,6 +1,6 @@
 using MarsRoverAPI.ModelBase.Models;
 
-namespace MarsRoverAPI.PerseveranceRover.Models
+namespace MarsRoverAPI.Models.PerseveranceRover
 {
     public class Root : RootBase<Image<ImageFiles, Camera>> { }
 }
