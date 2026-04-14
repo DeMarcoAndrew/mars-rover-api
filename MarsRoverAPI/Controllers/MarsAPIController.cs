@@ -63,17 +63,7 @@ namespace MarsRoverAPI.Controllers
         {
             try
             {
-                var result = await _curiosityRoverService.GetCuriosityRoverDataAsync();
-
-                var imagesOnlyResult = size?.ToLower() switch
-                {
-                    "small" => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.Small).ToList(),
-                    "medium" => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.Medium).ToList(),
-                    "large" => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.Large).ToList(),
-                    _ => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.FullRes).ToList()
-                };
-
-                return Ok(imagesOnlyResult);
+                return Ok(await _curiosityRoverService.GetRandomCuriosityRoverImageAsync(size));
             }
             catch (Exception ex)
             {
