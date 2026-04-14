@@ -1,21 +1,29 @@
 using MarsRoverAPI.Calculators;
+using MarsRoverAPI.Models.CuriosityRover;
 using MarsRoverAPI.Repositories;
 
 namespace MarsRoverAPI.Services
 {
     public class CuriosityRoverService : ICuriosityRoverService
     {
-        private IMarsAPIRepository<Models.CuriosityRover.Root> _marsAPIRepository;
+        private IMarsAPIRepository<Root> _marsAPIRepository;
 
-        public CuriosityRoverService(IMarsAPIRepository<Models.CuriosityRover.Root> marsAPIRepository)
+        public CuriosityRoverService(IMarsAPIRepository<Root> marsAPIRepository)
         {
             _marsAPIRepository = marsAPIRepository;
         }
 
-        public async Task<Models.CuriosityRover.Root> GetCuriosityRoverDataAsync(string apiPath, int? sol = null, DateTime? earth_date = null, bool? latest = null, int? page = null, int? per_page = null)
+        public async Task<Root> GetCuriosityRoverDataAsync(int? sol = null, string? earthDate = null, bool? latest = null, int? page = null, int? perPage = null)
         {
+            DateTime? dtEarthDate = null;
+
+            if (!string.IsNullOrWhiteSpace(earthDate))
+            {
+                dtEarthDate = DateTime.ParseExact(earthDate, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+            }
+
             //Get a random sol date if all 3 params have no value
-            if (!sol.HasValue && !earth_date.HasValue && !latest.HasValue)
+            if (!sol.HasValue && !dtEarthDate.HasValue && !latest.HasValue)
             {
                 DateTime curiosityLandDate = DateTime.Parse("2012-08-06T05:17:00Z", null, System.Globalization.DateTimeStyles.RoundtripKind);
 
@@ -29,9 +37,9 @@ namespace MarsRoverAPI.Services
 
                 sol = (int)DateCalculator.CalculateCuriositySol(randomDate);
             }
-            else if (!sol.HasValue && earth_date.HasValue)
+            else if (!sol.HasValue && dtEarthDate.HasValue)
             {
-                sol = (int)DateCalculator.CalculateCuriositySol(earth_date.Value);
+                sol = (int)DateCalculator.CalculateCuriositySol(dtEarthDate.Value);
             }
             else if (!sol.HasValue && latest.HasValue)
             {
@@ -48,7 +56,35 @@ namespace MarsRoverAPI.Services
                 throw new InvalidOperationException("Unable to determine 'sol' value for Curiosity rover request.");
             }
 
-            return await _marsAPIRepository.GetMarsAPIDataAsync(apiPath, sol.Value, page, per_page);
+            return await _marsAPIRepository.GetMarsAPIDataAsync(MarsAPIConstants.CuriosityRoverPath, sol.Value, page, perPage);
+        }
+
+        public async Task<IEnumerable<string>> GetCuriosityRoverImagesAsync(int? sol = null, string? earthDate = null, bool? latest = null, string? size = null, int? page = null, int? perPage = null)
+        {
+            var result = await GetCuriosityRoverDataAsync(sol, earthDate, latest, page, perPage);
+
+            var imagesOnlyResult = size?.ToLower() switch
+            {
+                "small" => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.Small).ToList(),
+                "medium" => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.Medium).ToList(),
+                "large" => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.Large).ToList(),
+                _ => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.FullRes).ToList()
+            };
+        
+            return imagesOnlyResult;
+        }
+    
+        public async Task<string> GetRandomCuriosityRoverImageAsync(string? size = null)
+        {
+            var result = await GetCuriosityRoverImagesAsync(size: size);
+            if (result != null && result.Any())
+            {
+                return result.ElementAt(Random.Shared.Next(result.Count()));
+            }
+            else
+            {
+                throw new InvalidOperationException("Error occurred while fetching random Curiosity rover image.");
+            }
         }
     }
 }

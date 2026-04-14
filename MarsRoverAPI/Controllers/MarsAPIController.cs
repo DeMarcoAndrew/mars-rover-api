@@ -29,14 +29,7 @@ namespace MarsRoverAPI.Controllers
         {
             try
             {
-                DateTime? earthDate = null;
-
-                if (!string.IsNullOrWhiteSpace(earth_date))
-                {
-                    earthDate = DateTime.ParseExact(earth_date, "MM-dd-yyyy", System.Globalization.CultureInfo.InvariantCulture);
-                }
-
-                return Ok(await _curiosityRoverService.GetCuriosityRoverDataAsync(MarsAPIConstants.CuriosityRoverPath, sol, earthDate, latest, page, per_page));
+                return Ok(await _curiosityRoverService.GetCuriosityRoverDataAsync(sol, earth_date, latest, page, per_page));
             }
             catch (Exception ex)
             {
@@ -56,21 +49,28 @@ namespace MarsRoverAPI.Controllers
         {
             try
             {
-                DateTime? earthDate = null;
+                return Ok(await _curiosityRoverService.GetCuriosityRoverImagesAsync(sol, earth_date, latest, size, page, per_page));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error! " + ex.Message);
+            }
+        }
 
-                if (!string.IsNullOrWhiteSpace(earth_date))
-                {
-                    earthDate = DateTime.ParseExact(earth_date, "MM-dd-yyyy", System.Globalization.CultureInfo.InvariantCulture);
-                }
 
-                var result = await _curiosityRoverService.GetCuriosityRoverDataAsync(MarsAPIConstants.CuriosityRoverPath, sol, earthDate, latest, page, per_page);
+        [HttpGet("curiosity/random")]
+        public async Task<IActionResult> GetRandomCuriosityRoverImage([FromQuery] string? size = null)
+        {
+            try
+            {
+                var result = await _curiosityRoverService.GetCuriosityRoverDataAsync();
 
                 var imagesOnlyResult = size?.ToLower() switch
                 {
                     "small" => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.Small).ToList(),
                     "medium" => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.Medium).ToList(),
                     "large" => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.Large).ToList(),
-                    _ => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.Large).ToList()
+                    _ => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.FullRes).ToList()
                 };
 
                 return Ok(imagesOnlyResult);
