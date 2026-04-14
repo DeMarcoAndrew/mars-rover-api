@@ -83,7 +83,15 @@ namespace MarsRoverAPI.Services
             }
             else
             {
-                throw new InvalidOperationException("Error occurred while fetching random Curiosity rover image.");
+                var sol176Result = await GetCuriosityRoverImagesAsync(sol: 176, size: size);
+                if (sol176Result != null && sol176Result.Any())
+                {
+                    return sol176Result.ElementAt(Random.Shared.Next(sol176Result.Count()));
+                }
+                else
+                {
+                    throw new InvalidOperationException("Error occurred while fetching random Curiosity rover image.");
+                }
             }
         }
     }
