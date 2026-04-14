@@ -24,12 +24,13 @@ namespace MarsRoverAPI.Controllers
             [FromQuery] string? earth_date = null,
             [FromQuery] bool? latest = null,
             [FromQuery] int? page = null, 
-            [FromQuery] int? per_page = null
+            [FromQuery] int? per_page = null,
+            [FromQuery] string? camera = null
         )
         {
             try
             {
-                return Ok(await _curiosityRoverService.GetCuriosityRoverDataAsync(sol, earth_date, latest, page, per_page));
+                return Ok(await _curiosityRoverService.GetCuriosityRoverDataAsync(sol, earth_date, latest, page, per_page, camera));
             }
             catch (Exception ex)
             {
@@ -44,12 +45,13 @@ namespace MarsRoverAPI.Controllers
             [FromQuery] bool? latest = null,
             [FromQuery] string? size = null,
             [FromQuery] int? page = null, 
-            [FromQuery] int? per_page = null
+            [FromQuery] int? per_page = null,
+            [FromQuery] string? camera = null
         )
         {
             try
             {
-                return Ok(await _curiosityRoverService.GetCuriosityRoverImagesAsync(sol, earth_date, latest, size, page, per_page));
+                return Ok(await _curiosityRoverService.GetCuriosityRoverImagesAsync(sol, earth_date, latest, size, page, per_page, camera));
             }
             catch (Exception ex)
             {
@@ -59,11 +61,19 @@ namespace MarsRoverAPI.Controllers
 
 
         [HttpGet("curiosity/random")]
-        public async Task<IActionResult> GetRandomCuriosityRoverImage([FromQuery] string? size = null)
+        public async Task<IActionResult> GetRandomCuriosityRoverImage(
+            [FromQuery] int? sol = null,
+            [FromQuery] string? earth_date = null,
+            [FromQuery] bool? latest = null,
+            [FromQuery] string? size = null,
+            [FromQuery] int? page = null, 
+            [FromQuery] int? per_page = null,
+            [FromQuery] string? camera = null
+        )
         {
             try
             {
-                return Ok(await _curiosityRoverService.GetRandomCuriosityRoverImageAsync(size));
+                return Ok(await _curiosityRoverService.GetRandomCuriosityRoverImageAsync(sol, earth_date, latest, size, page, per_page, camera));
             }
             catch (Exception ex)
             {

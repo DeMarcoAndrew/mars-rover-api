@@ -11,7 +11,7 @@ namespace MarsRoverAPI.Repositories
             _httpClient = httpClientFactory.CreateClient("MarsAPI");
         }
 
-        public async Task<T> GetMarsAPIDataAsync(string apiPath, int sol, int? page = null, int? per_page = null)
+        public async Task<T> GetMarsAPIDataAsync(string apiPath, int sol, int? page = null, int? per_page = null, string? camera = null)
         {
             try 
             {
@@ -27,6 +27,11 @@ namespace MarsRoverAPI.Repositories
                         queryParams.Add($"per_page={per_page.Value}");
                 }
                 
+                if(!string.IsNullOrWhiteSpace(camera))
+                {
+                    queryParams.Add($"search={camera}");
+                }
+
                 queryString = "&" + string.Join("&", queryParams);
 
                 return await _httpClient.GetFromJsonAsync<T>(apiPath + queryString) ?? throw new Exception();

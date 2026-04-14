@@ -13,7 +13,7 @@ namespace MarsRoverAPI.Services
             _marsAPIRepository = marsAPIRepository;
         }
 
-        public async Task<Root> GetCuriosityRoverDataAsync(int? sol = null, string? earthDate = null, bool? latest = null, int? page = null, int? perPage = null)
+        public async Task<Root> GetCuriosityRoverDataAsync(int? sol = null, string? earthDate = null, bool? latest = null, int? page = null, int? perPage = null, string? camera = null)
         {
             DateTime? dtEarthDate = null;
 
@@ -56,12 +56,12 @@ namespace MarsRoverAPI.Services
                 throw new InvalidOperationException("Unable to determine 'sol' value for Curiosity rover request.");
             }
 
-            return await _marsAPIRepository.GetMarsAPIDataAsync(MarsAPIConstants.CuriosityRoverPath, sol.Value, page, perPage);
+            return await _marsAPIRepository.GetMarsAPIDataAsync(MarsAPIConstants.CuriosityRoverPath, sol.Value, page, perPage, camera);
         }
 
-        public async Task<IEnumerable<string>> GetCuriosityRoverImagesAsync(int? sol = null, string? earthDate = null, bool? latest = null, string? size = null, int? page = null, int? perPage = null)
+        public async Task<IEnumerable<string>> GetCuriosityRoverImagesAsync(int? sol = null, string? earthDate = null, bool? latest = null, string? size = null, int? page = null, int? perPage = null, string? camera = null)
         {
-            var result = await GetCuriosityRoverDataAsync(sol, earthDate, latest, page, perPage);
+            var result = await GetCuriosityRoverDataAsync(sol, earthDate, latest, page, perPage, camera);
 
             var imagesOnlyResult = size?.ToLower() switch
             {
@@ -74,19 +74,21 @@ namespace MarsRoverAPI.Services
             return imagesOnlyResult;
         }
     
-        public async Task<string> GetRandomCuriosityRoverImageAsync(string? size = null)
+        public async Task<string> GetRandomCuriosityRoverImageAsync(int? sol = null, string? earthDate = null, bool? latest = null, string? size = null, int? page = null, int? perPage = null, string? camera = null)
         {
-            var result = await GetCuriosityRoverImagesAsync(size: size);
+            var result = await GetCuriosityRoverImagesAsync(sol, earthDate, latest, size, page, perPage, camera);
             if (result != null && result.Any())
             {
                 return result.ElementAt(Random.Shared.Next(result.Count()));
             }
             else
             {
-                var sol176Result = await GetCuriosityRoverImagesAsync(sol: 176, size: size);
-                if (sol176Result != null && sol176Result.Any())
+                //if results for random sol above don't come back, 
+                // we will grab data from sol 4857 which has images for all Curiosity's cameras
+                var sol4857Result = await GetCuriosityRoverImagesAsync(sol: 4857, size: size, camera: camera);
+                if (sol4857Result != null && sol4857Result.Any())
                 {
-                    return sol176Result.ElementAt(Random.Shared.Next(sol176Result.Count()));
+                    return sol4857Result.ElementAt(Random.Shared.Next(sol4857Result.Count()));
                 }
                 else
                 {
