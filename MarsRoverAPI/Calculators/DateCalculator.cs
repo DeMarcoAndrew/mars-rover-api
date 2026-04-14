@@ -22,7 +22,7 @@ namespace MarsRoverAPI.Calculators
             double curiosityLandingMSD = 49269.0;
             double solCount = msd - curiosityLandingMSD;
             
-            return Math.Floor(solCount);
+            return Math.Floor(solCount + 1);
         }
     }
 }
