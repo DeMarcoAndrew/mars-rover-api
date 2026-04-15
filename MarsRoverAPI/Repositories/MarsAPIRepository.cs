@@ -53,5 +53,17 @@ namespace MarsRoverAPI.Repositories
                 throw new Exception(ex.StackTrace);
             }     
         }
+
+        public async Task<LatestDataRoot> GetLatestPerseveranceRoverSolsAsync()
+        {
+            try 
+            {
+                return await _httpClient.GetFromJsonAsync<LatestDataRoot>(MarsAPIConstants.PerseveranceRoverPath + "?latest=true") ?? throw new Exception();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.StackTrace);
+            }     
+        }
     }
 }

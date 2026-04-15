@@ -62,18 +62,13 @@ namespace MarsRoverAPI.Controllers
 
         [HttpGet("curiosity/random")]
         public async Task<IActionResult> GetRandomCuriosityRoverImage(
-            [FromQuery] int? sol = null,
-            [FromQuery] string? earth_date = null,
-            [FromQuery] bool? latest = null,
             [FromQuery] string? size = null,
-            [FromQuery] int? page = null, 
-            [FromQuery] int? per_page = null,
             [FromQuery] string? camera = null
         )
         {
             try
             {
-                return Ok(await _curiosityRoverService.GetRandomCuriosityRoverImageAsync(sol, earth_date, latest, size, page, per_page, camera));
+                return Ok(await _curiosityRoverService.GetRandomCuriosityRoverImageAsync(size, camera));
             }
             catch (Exception ex)
             {
@@ -83,14 +78,17 @@ namespace MarsRoverAPI.Controllers
 
         [HttpGet("perseverance")]
         public async Task<IActionResult> GetPerseveranceRoverData(
-            [FromQuery] int? sol = null, 
+            [FromQuery] int? sol = null,
+            [FromQuery] string? earth_date = null,
+            [FromQuery] bool? latest = null,
             [FromQuery] int? page = null, 
-            [FromQuery] int? per_page = null
+            [FromQuery] int? per_page = null,
+            [FromQuery] string? camera = null
         )
         {
             try
             {
-                return Ok(await _perseveranceRoverService.GetPerseveranceRoverDataAsync(MarsAPIConstants.PerseveranceRoverPath, sol, page, per_page));
+                return Ok(await _perseveranceRoverService.GetPerseveranceRoverDataAsync(sol, earth_date, latest, page, per_page, camera));
             }
             catch (Exception ex)
             {

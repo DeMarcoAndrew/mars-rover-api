@@ -74,9 +74,9 @@ namespace MarsRoverAPI.Services
             return imagesOnlyResult;
         }
     
-        public async Task<string> GetRandomCuriosityRoverImageAsync(int? sol = null, string? earthDate = null, bool? latest = null, string? size = null, int? page = null, int? perPage = null, string? camera = null)
+        public async Task<string> GetRandomCuriosityRoverImageAsync(string? size = null, string? camera = null)
         {
-            var result = await GetCuriosityRoverImagesAsync(sol, earthDate, latest, size, page, perPage, camera);
+            var result = await GetCuriosityRoverImagesAsync(size: size, camera: camera);
             if (result != null && result.Any())
             {
                 return result.ElementAt(Random.Shared.Next(result.Count()));

@@ -6,7 +6,7 @@ namespace MarsRoverAPI.Services
     {
         public Task<Root> GetCuriosityRoverDataAsync(int? sol = null, string? earthDate = null, bool? latest = null, int? page = null, int? perPage = null, string? camera = null);
         public Task<IEnumerable<string>> GetCuriosityRoverImagesAsync(int? sol = null, string? earthDate = null, bool? latest = null, string? size = null, int? page = null, int? perPage = null, string? camera = null);
-        public Task<string> GetRandomCuriosityRoverImageAsync(int? sol = null, string? earthDate = null, bool? latest = null, string? size = null, int? page = null, int? perPage = null, string? camera = null);
+        public Task<string> GetRandomCuriosityRoverImageAsync(string? size = null, string? camera = null);
 
     }
 }
