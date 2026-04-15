@@ -74,14 +74,29 @@ namespace MarsRoverAPI.Services
             return imagesOnlyResult;        
         }
 
+        public async Task<IEnumerable<string>> GetPerseveranceRoverImagesAsync(string? size = null, string? camera = null)
+        {
+            var result = await GetPerseveranceRoverDataAsync(camera: camera);
+
+            var imagesOnlyResult = size?.ToLower() switch
+            {
+                "small" => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.Small).ToList(),
+                "medium" => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.Medium).ToList(),
+                "large" => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.Large).ToList(),
+                _ => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.FullRes).ToList()
+            };
+        
+            return imagesOnlyResult;        
+        }
+
         public async Task<string> GetRandomPerseveranceRoverImageAsync(string? size = null, string? camera = null)
         {
-          var result = await GetPerseveranceRoverImagesAsync(size: size, camera: camera);
+            var result = await GetPerseveranceRoverImagesAsync(size: size, camera: camera);
             if (result != null && result.Any())
             {
                 return result.ElementAt(Random.Shared.Next(result.Count()));
             }
-            else if((result == null || !result.Any()) && !string.IsNullOrWhiteSpace(camera))
+            else if ((result == null || !result.Any()) && !string.IsNullOrWhiteSpace(camera))
             {
                 var randomCameraResult = await _marsAPIRepository.GetMarsAPIDataAsync(MarsAPIConstants.CuriosityRoverPath, camera: camera);
                 if (randomCameraResult != null && randomCameraResult.Images != null && randomCameraResult.Images.Any())
@@ -103,7 +118,7 @@ namespace MarsRoverAPI.Services
                 {
                     throw new InvalidOperationException("Error occurred while fetching random Perseverance rover image.");
                 }
-            } 
+            }
             else
             {
                 //we will grab data from sol 200 which has images if the random sol above doesn't come back with images
@@ -117,7 +132,7 @@ namespace MarsRoverAPI.Services
                 {
                     throw new InvalidOperationException("Error occurred while fetching random Perseverance rover image.");
                 }
-            } 
+            }
         }
     }
 }
