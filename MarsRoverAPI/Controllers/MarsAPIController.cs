@@ -96,6 +96,44 @@ namespace MarsRoverAPI.Controllers
             }
         }
 
+        [HttpGet("perseverance/images")]
+        public async Task<IActionResult> GetPerseveranceRoverImages(
+            [FromQuery] int? sol = null,
+            [FromQuery] string? earth_date = null,
+            [FromQuery] bool? latest = null,
+            [FromQuery] string? size = null,
+            [FromQuery] int? page = null, 
+            [FromQuery] int? per_page = null,
+            [FromQuery] string? camera = null
+        )
+        {
+            try
+            {
+                return Ok(await _perseveranceRoverService.GetPerseveranceRoverImagesAsync(sol, earth_date, latest, size, page, per_page, camera));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error! " + ex.Message);
+            }
+        }
+
+
+        [HttpGet("perseverance/random")]
+        public async Task<IActionResult> GetRandomPerseveranceRoverImage(
+            [FromQuery] string? size = null,
+            [FromQuery] string? camera = null
+        )
+        {
+            try
+            {
+                return Ok(await _perseveranceRoverService.GetRandomPerseveranceRoverImageAsync(size, camera));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error! " + ex.Message);
+            }
+        }
+
         // [HttpGet("insight")]
         // public async Task<IActionResult> GetInSightLanderData(
         //     [FromQuery] int? sol = null, 
