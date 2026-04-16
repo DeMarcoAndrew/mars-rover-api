@@ -71,7 +71,7 @@ namespace MarsRoverAPI.Controllers
 
                 var result = await _curiosityRoverService.GetCuriosityRoverImagesAsync(sol, earth_date, latest, size, page, per_page, camera);
 
-                return per_page == 1 && result.Count() == 1 ? Ok(result.Single()) : Ok(result);
+                return per_page == 1 && result.Count() > 0 ? Ok(result.Single()) : Ok(result);
             }
             catch (Exception ex)
             {
@@ -132,7 +132,7 @@ namespace MarsRoverAPI.Controllers
 
                 var result = await _perseveranceRoverService.GetPerseveranceRoverImagesAsync(sol, earth_date, latest, size, page, per_page, camera);
 
-                return per_page == 1 && result.Count() == 1 ? Ok(result.Single()) : Ok(result);
+                return per_page == 1 && result.Count() > 0 ? Ok(result.Single()) : Ok(result);
             }
             catch (Exception ex)
             {
