@@ -1,4 +1,5 @@
 using MarsRoverAPI.Models.CuriosityRover;
+using MarsRoverAPI.Models.PerseveranceRover;
 
 namespace MarsRoverAPI.Repositories
 {
@@ -13,7 +14,7 @@ namespace MarsRoverAPI.Repositories
 
         public async Task<T> GetMarsAPIDataAsync(string apiPath, int sol, int? page = null, int? per_page = null, string? camera = null)
         {
-            try 
+            try
             {
                 var queryString = string.Empty;
 
@@ -26,8 +27,8 @@ namespace MarsRoverAPI.Repositories
                     if (per_page.HasValue)
                         queryParams.Add($"per_page={per_page.Value}");
                 }
-                
-                if(!string.IsNullOrWhiteSpace(camera))
+
+                if (!string.IsNullOrWhiteSpace(camera))
                 {
                     queryParams.Add($"search={camera}");
                 }
@@ -39,16 +40,16 @@ namespace MarsRoverAPI.Repositories
             catch (Exception ex)
             {
                 throw new Exception(ex.StackTrace);
-            }     
+            }
         }
 
         public async Task<T> GetMarsAPIDataAsync(string apiPath, string? camera = null)
         {
-            try 
+            try
             {
                 var queryString = string.Empty;
 
-                if(!string.IsNullOrWhiteSpace(camera))
+                if (!string.IsNullOrWhiteSpace(camera))
                 {
                     queryString = $"&search={camera}";
                 }
@@ -58,31 +59,31 @@ namespace MarsRoverAPI.Repositories
             catch (Exception ex)
             {
                 throw new Exception(ex.StackTrace);
-            }     
+            }
         }
 
-        public async Task<LatestDataRoot> GetLatestCuriosityRoverSolsAsync()
+        public async Task<Models.CuriosityRover.LatestDataRoot> GetLatestCuriosityRoverSolsAsync()
         {
-            try 
+            try
             {
-                return await _httpClient.GetFromJsonAsync<LatestDataRoot>(MarsAPIConstants.LatestCuriosityRoverSolsPath) ?? throw new Exception();
+                return await _httpClient.GetFromJsonAsync<Models.CuriosityRover.LatestDataRoot>(MarsAPIConstants.LatestCuriosityRoverSolsPath) ?? throw new Exception();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.StackTrace);
-            }     
+            }
         }
 
-        public async Task<LatestDataRoot> GetLatestPerseveranceRoverSolsAsync()
+        public async Task<Models.PerseveranceRover.LatestDataRoot> GetLatestPerseveranceRoverSolsAsync()
         {
-            try 
+            try
             {
-                return await _httpClient.GetFromJsonAsync<LatestDataRoot>(MarsAPIConstants.PerseveranceRoverPath + "?latest=true") ?? throw new Exception();
+                return await _httpClient.GetFromJsonAsync<Models.PerseveranceRover.LatestDataRoot>(MarsAPIConstants.PerseveranceRoverPath + "?latest=true") ?? throw new Exception();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.StackTrace);
-            }     
+            }
         }
     }
 }

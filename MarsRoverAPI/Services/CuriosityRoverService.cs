@@ -41,7 +41,7 @@ namespace MarsRoverAPI.Services
             {
                 sol = (int)DateCalculator.CalculateCuriositySol(dtEarthDate.Value);
             }
-            else if (!sol.HasValue && latest.HasValue)
+            else if (!sol.HasValue && latest.HasValue && latest == true)
             {
                 var latestData = await _marsAPIRepository.GetLatestCuriosityRoverSolsAsync();
                 if (latestData != null && latestData.Success.HasValue && latestData.Success.Value
@@ -63,37 +63,26 @@ namespace MarsRoverAPI.Services
         {
             var result = await GetCuriosityRoverDataAsync(sol, earthDate, latest, page, perPage, camera);
 
-            var imagesOnlyResult = size?.ToLower() switch
+            if (result != null && result.Images != null)
             {
-                "small" => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.Small).ToList(),
-                "medium" => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.Medium).ToList(),
-                "large" => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.Large).ToList(),
-                _ => result.Images.Select(imgs => imgs.ImageFiles).Select(img => img.FullRes).ToList()
-            };
-        
-            return imagesOnlyResult;
-        }
-    
-        public async Task<string> GetRandomCuriosityRoverImageAsync(string? size = null, string? camera = null)
-        {
-            var result = await GetCuriosityRoverImagesAsync(size: size, camera: camera);
-            if (result != null && result.Any())
-            {
-                return result.ElementAt(Random.Shared.Next(result.Count()));
+                var validResults = result.Images
+                    .Where(p => p != null && p.ImageFiles != null && p.ImageFiles.Small != null && p.ImageFiles.Medium != null && p.ImageFiles.Large != null && p.ImageFiles.FullRes != null)
+                    .Select(p => p?.ImageFiles)
+                    .ToList();
+
+                var imagesOnlyResult = size?.ToLower() switch
+                {
+                    "small" => validResults.Select(img => img?.Small).OfType<string>().ToList(),
+                    "medium" => validResults.Select(img => img?.Small).OfType<string>().ToList(),
+                    "large" => validResults.Select(img => img?.Small).OfType<string>().ToList(),
+                    _ => validResults.Select(img => img?.Small).OfType<string>().ToList()
+                };
+
+                return imagesOnlyResult;
             }
             else
             {
-                //if results for random sol above don't come back, 
-                // we will grab data from sol 4857 which has images for all Curiosity's cameras
-                var sol4857Result = await GetCuriosityRoverImagesAsync(sol: 4857, size: size, camera: camera);
-                if (sol4857Result != null && sol4857Result.Any())
-                {
-                    return sol4857Result.ElementAt(Random.Shared.Next(sol4857Result.Count()));
-                }
-                else
-                {
-                    throw new InvalidOperationException("Error occurred while fetching random Curiosity rover image.");
-                }
+                return [];
             }
         }
     }

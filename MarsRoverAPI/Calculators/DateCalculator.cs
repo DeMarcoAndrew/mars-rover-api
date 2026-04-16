@@ -9,7 +9,7 @@ namespace MarsRoverAPI.Calculators
             double modifiedJulianDate = julianDate - 2400000.5;
             
             // NASA's Formula
-            return (modifiedJulianDate - 51549.5) / 1.02749125 + 44796.0 - 0.0009626;
+            return ((modifiedJulianDate - 51549.5) / 1.02749125) + 44796.0 - 0.0009626;
         }
 
         public static double CalculateCuriositySol(DateTime utcDateTime)

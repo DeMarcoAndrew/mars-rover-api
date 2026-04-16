@@ -1,4 +1,5 @@
 using MarsRoverAPI.Models.CuriosityRover;
+using MarsRoverAPI.Models.PerseveranceRover;
 
 namespace MarsRoverAPI.Repositories
 {
@@ -8,9 +9,9 @@ namespace MarsRoverAPI.Repositories
 
         public Task<T> GetMarsAPIDataAsync(string apiPath, string? camera = null);
 
-        public Task<LatestDataRoot> GetLatestCuriosityRoverSolsAsync();
+        public Task<Models.CuriosityRover.LatestDataRoot> GetLatestCuriosityRoverSolsAsync();
 
-        public Task<LatestDataRoot> GetLatestPerseveranceRoverSolsAsync();
+        public Task<Models.PerseveranceRover.LatestDataRoot> GetLatestPerseveranceRoverSolsAsync();
 
     }
 }

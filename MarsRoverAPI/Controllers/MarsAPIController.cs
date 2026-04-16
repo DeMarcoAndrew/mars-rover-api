@@ -19,17 +19,26 @@ namespace MarsRoverAPI.Controllers
         }
  
         [HttpGet("curiosity")]
+        [HttpGet("curiosity/{sol:int}")]
+        [HttpGet("curiosity/{earth_date:string}")]
+        [HttpGet("curiosity/latest")]
         public async Task<IActionResult> GetCuriosityRoverData(
-            [FromQuery] int? sol = null,
-            [FromQuery] string? earth_date = null,
-            [FromQuery] bool? latest = null,
-            [FromQuery] int? page = null, 
+            [FromRoute] int? sol = null,
+            [FromRoute] string? earth_date = null,
+            [FromQuery] int? page = null,
             [FromQuery] int? per_page = null,
             [FromQuery] string? camera = null
         )
         {
             try
             {
+                bool latest = false;
+
+                if (Request != null && Request.Path.HasValue && Request.Path.Value.Contains("/latest", StringComparison.OrdinalIgnoreCase))
+                {
+                    latest = true;
+                }
+
                 return Ok(await _curiosityRoverService.GetCuriosityRoverDataAsync(sol, earth_date, latest, page, per_page, camera));
             }
             catch (Exception ex)
@@ -39,36 +48,30 @@ namespace MarsRoverAPI.Controllers
         }
 
         [HttpGet("curiosity/images")]
+        [HttpGet("curiosity/images/{sol:int}")]
+        [HttpGet("curiosity/images/{earth_date:string}")]
+        [HttpGet("curiosity/images/latest")]
         public async Task<IActionResult> GetCuriosityRoverImages(
-            [FromQuery] int? sol = null,
-            [FromQuery] string? earth_date = null,
-            [FromQuery] bool? latest = null,
+            [FromRoute] int? sol = null,
+            [FromRoute] string? earth_date = null,
             [FromQuery] string? size = null,
-            [FromQuery] int? page = null, 
+            [FromQuery] int? page = null,
             [FromQuery] int? per_page = null,
             [FromQuery] string? camera = null
         )
         {
             try
             {
-                return Ok(await _curiosityRoverService.GetCuriosityRoverImagesAsync(sol, earth_date, latest, size, page, per_page, camera));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "Error! " + ex.Message);
-            }
-        }
+                bool latest = false;
 
+                if (Request != null && Request.Path.HasValue && Request.Path.Value.Contains("/latest", StringComparison.OrdinalIgnoreCase))
+                {
+                    latest = true;
+                }
 
-        [HttpGet("curiosity/random")]
-        public async Task<IActionResult> GetRandomCuriosityRoverImage(
-            [FromQuery] string? size = null,
-            [FromQuery] string? camera = null
-        )
-        {
-            try
-            {
-                return Ok(await _curiosityRoverService.GetRandomCuriosityRoverImageAsync(size, camera));
+                var result = await _curiosityRoverService.GetCuriosityRoverImagesAsync(sol, earth_date, latest, size, page, per_page, camera);
+
+                return per_page == 1 && result.Count() == 1 ? Ok(result.Single()) : Ok(result);
             }
             catch (Exception ex)
             {
@@ -77,17 +80,26 @@ namespace MarsRoverAPI.Controllers
         }
 
         [HttpGet("perseverance")]
+        [HttpGet("perseverance/{sol:int}")]
+        [HttpGet("perseverance/{earth_date:string}")]
+        [HttpGet("perseverance/latest")]
         public async Task<IActionResult> GetPerseveranceRoverData(
-            [FromQuery] int? sol = null,
-            [FromQuery] string? earth_date = null,
-            [FromQuery] bool? latest = null,
-            [FromQuery] int? page = null, 
+            [FromRoute] int? sol = null,
+            [FromRoute] string? earth_date = null,
+            [FromQuery] int? page = null,
             [FromQuery] int? per_page = null,
             [FromQuery] string? camera = null
         )
         {
             try
             {
+                bool latest = false;
+
+                if (Request != null && Request.Path.HasValue && Request.Path.Value.Contains("/latest", StringComparison.OrdinalIgnoreCase))
+                {
+                    latest = true;
+                }
+
                 return Ok(await _perseveranceRoverService.GetPerseveranceRoverDataAsync(sol, earth_date, latest, page, per_page, camera));
             }
             catch (Exception ex)
@@ -97,36 +109,30 @@ namespace MarsRoverAPI.Controllers
         }
 
         [HttpGet("perseverance/images")]
+        [HttpGet("perseverance/images/{sol:int}")]
+        [HttpGet("perseverance/images/{earth_date:string}")]
+        [HttpGet("perseverance/images/latest")]
         public async Task<IActionResult> GetPerseveranceRoverImages(
-            [FromQuery] int? sol = null,
-            [FromQuery] string? earth_date = null,
-            [FromQuery] bool? latest = null,
+            [FromRoute] int? sol = null,
+            [FromRoute] string? earth_date = null,
             [FromQuery] string? size = null,
-            [FromQuery] int? page = null, 
+            [FromQuery] int? page = null,
             [FromQuery] int? per_page = null,
             [FromQuery] string? camera = null
         )
         {
             try
             {
-                return Ok(await _perseveranceRoverService.GetPerseveranceRoverImagesAsync(sol, earth_date, latest, size, page, per_page, camera));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "Error! " + ex.Message);
-            }
-        }
+                bool latest = false;
 
+                if (Request != null && Request.Path.HasValue && Request.Path.Value.Contains("/latest", StringComparison.OrdinalIgnoreCase))
+                {
+                    latest = true;
+                }
 
-        [HttpGet("perseverance/random")]
-        public async Task<IActionResult> GetRandomPerseveranceRoverImage(
-            [FromQuery] string? size = null,
-            [FromQuery] string? camera = null
-        )
-        {
-            try
-            {
-                return Ok(await _perseveranceRoverService.GetRandomPerseveranceRoverImageAsync(size, camera));
+                var result = await _perseveranceRoverService.GetPerseveranceRoverImagesAsync(sol, earth_date, latest, size, page, per_page, camera);
+
+                return per_page == 1 && result.Count() == 1 ? Ok(result.Single()) : Ok(result);
             }
             catch (Exception ex)
             {

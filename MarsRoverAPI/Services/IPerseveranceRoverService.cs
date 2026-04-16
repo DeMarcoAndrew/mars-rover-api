@@ -6,6 +6,5 @@ namespace MarsRoverAPI.Services
     {
         public Task<Root> GetPerseveranceRoverDataAsync(int? sol = null, string? earthDate = null, bool? latest = null, int? page = null, int? perPage = null, string? camera = null);
         public Task<IEnumerable<string>> GetPerseveranceRoverImagesAsync(int? sol = null, string? earthDate = null, bool? latest = null, string? size = null, int? page = null, int? perPage = null, string? camera = null);
-        public Task<string> GetRandomPerseveranceRoverImageAsync(string? size = null, string? camera = null);
     }
 }
