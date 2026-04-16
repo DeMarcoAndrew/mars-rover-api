@@ -26,7 +26,7 @@ namespace MarsRoverAPI.Services
             {
                 sol = (int)DateCalculator.CalculatePerseveranceSol(dtEarthDate.Value);
             }
-            else if (!sol.HasValue && latest.HasValue)
+            else if (!sol.HasValue && latest.HasValue && latest == true)
             {
                 var latestData = await _marsAPIRepository.GetLatestPerseveranceRoverSolsAsync();
                 if (latestData != null && latestData.LatestSols != null && latestData.LatestSols.Count > 0)

@@ -23,7 +23,7 @@ namespace MarsRoverAPI.Services
             }
 
             //Get a random sol date if all 3 params have no value
-            if (!sol.HasValue && !dtEarthDate.HasValue && !latest.HasValue)
+            if (!sol.HasValue && !dtEarthDate.HasValue && (!latest.HasValue || latest == false))
             {
                 DateTime curiosityLandDate = DateTime.Parse("2012-08-06T05:17:00Z", null, System.Globalization.DateTimeStyles.RoundtripKind);
 
