@@ -48,8 +48,8 @@ namespace MarsRoverAPI.Controllers
         }
 
         [HttpGet("curiosity/images")]
-        [HttpGet("curiosity/images/{sol:int}")]
-        [HttpGet("curiosity/images/{earth_date}")]
+        [HttpGet("curiosity/{sol:int}/images")]
+        [HttpGet("curiosity/{earth_date}/images")]
         [HttpGet("curiosity/images/latest")]
         public async Task<IActionResult> GetCuriosityRoverImages(
             [FromRoute] int? sol = null,
@@ -109,8 +109,8 @@ namespace MarsRoverAPI.Controllers
         }
 
         [HttpGet("perseverance/images")]
-        [HttpGet("perseverance/images/{sol:int}")]
-        [HttpGet("perseverance/images/{earth_date}")]
+        [HttpGet("perseverance/{sol:int}/images")]
+        [HttpGet("perseverance/{earth_date}/images")]
         [HttpGet("perseverance/images/latest")]
         public async Task<IActionResult> GetPerseveranceRoverImages(
             [FromRoute] int? sol = null,
