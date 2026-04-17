@@ -13,7 +13,7 @@ namespace MarsRoverAPI.Services
             _marsAPIRepository = marsAPIRepository;
         }
 
-        public async Task<IngenuityRoot> GetIngenuityHelicopterDataAsync(int? sol = null, string? earthDate = null, bool? latest = null, int? page = null, int? perPage = null, string? camera = null)
+        public async Task<IngenuityRoot> GetIngenuityHelicopterDataAsync(int? sol = null, string? earthDate = null, int? page = null, int? perPage = null, string? camera = null)
         {
             DateTime? dtEarthDate = null;
 
@@ -30,9 +30,9 @@ namespace MarsRoverAPI.Services
             return await _marsAPIRepository.GetMarsAPIDataAsync(MarsAPIConstants.IngenuityHelicopterPath, sol.Value, page, perPage, camera);
         }
 
-        public async Task<IEnumerable<string>> GetIngenuityHelicopterImagesAsync(int? sol = null, string? earthDate = null, bool? latest = null, string? size = null, int? page = null, int? perPage = null, string? camera = null)
+        public async Task<IEnumerable<string>> GetIngenuityHelicopterImagesAsync(int? sol = null, string? earthDate = null, string? size = null, int? page = null, int? perPage = null, string? camera = null)
         {
-            var result = await GetIngenuityHelicopterDataAsync(sol, earthDate, latest, page, perPage, camera);
+            var result = await GetIngenuityHelicopterDataAsync(sol, earthDate, page, perPage, camera);
 
             if (result != null && result.Images != null)
             {
