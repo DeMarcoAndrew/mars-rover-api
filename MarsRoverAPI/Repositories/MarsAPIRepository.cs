@@ -61,25 +61,6 @@ namespace MarsRoverAPI.Repositories
             }
         }
 
-        public async Task<T> GetMarsAPIDataAsync(string apiPath, string? camera = null)
-        {
-            try
-            {
-                var queryString = string.Empty;
-
-                if (!string.IsNullOrWhiteSpace(camera))
-                {
-                    queryString = $"&search={camera}";
-                }
-
-                return await _httpClient.GetFromJsonAsync<T>(apiPath + queryString) ?? throw new Exception();
-            }
-            catch (Exception)
-            {
-                return new T();
-            }
-        }
-
         public async Task<Models.CuriosityRover.LatestDataRoot> GetLatestCuriosityRoverSolsAsync()
         {
             try

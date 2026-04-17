@@ -63,22 +63,12 @@ namespace MarsRoverAPI.Services
         {
             var result = await GetCuriosityRoverDataAsync(sol, earthDate, latest, page, perPage, camera);
 
-            if (result != null && result.Images != null)
+            if (result != null && result.Items != null)
             {
-                var validResults = result.Images
-                    .Where(p => p != null && p.ImageFiles != null && p.ImageFiles.Small != null && p.ImageFiles.Medium != null && p.ImageFiles.Large != null && p.ImageFiles.FullRes != null)
-                    .Select(p => p?.ImageFiles)
+                return result.Items
+                    .Select(item => item?.HttpsUrl)
+                    .Where(imageUrl => imageUrl != null)
                     .ToList();
-
-                var imagesOnlyResult = size?.ToLower() switch
-                {
-                    "small" => validResults.Select(img => img?.Small).OfType<string>().ToList(),
-                    "medium" => validResults.Select(img => img?.Small).OfType<string>().ToList(),
-                    "large" => validResults.Select(img => img?.Small).OfType<string>().ToList(),
-                    _ => validResults.Select(img => img?.Small).OfType<string>().ToList()
-                };
-
-                return imagesOnlyResult;
             }
             else
             {
