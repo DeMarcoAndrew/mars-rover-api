@@ -68,7 +68,7 @@ namespace MarsRoverAPI.Controllers
 
                 var result = await _curiosityRoverService.GetCuriosityRoverImagesAsync(sol, earth_date, latest, page, per_page, camera);
 
-                return per_page == 1 && result.Count() > 0 ? Ok(result.Single()) : Ok(result);
+                return per_page == 1 && result.Count() > 0 ? Ok(result.First()) : Ok(result);
             }
             catch (Exception ex)
             {

@@ -28,7 +28,7 @@ namespace MarsRoverAPI.Controllers
         {
             try
             {
-                return Ok(await _ingenuityHelicopterService.GetIngenuityHelicopterDataAsync(sol, earth_date, latest, page, per_page, camera));
+                return Ok(await _ingenuityHelicopterService.GetIngenuityHelicopterDataAsync(sol, earth_date, page, per_page, camera));
             }
             catch (Exception ex)
             {
@@ -52,7 +52,7 @@ namespace MarsRoverAPI.Controllers
             {
                 var result = await _ingenuityHelicopterService.GetIngenuityHelicopterImagesAsync(sol, earth_date, size, page, per_page, camera);
 
-                return per_page == 1 && result.Count() > 0 ? Ok(result.Single()) : Ok(result);
+                return per_page == 1 && result.Count() > 0 ? Ok(result.First()) : Ok(result);
             }
             catch (Exception ex)
             {
