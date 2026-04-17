@@ -36,12 +36,7 @@ namespace MarsRoverAPI.Services
                 }
             }
 
-            if (!sol.HasValue)
-            {
-                throw new InvalidOperationException("Unable to determine 'sol' value for Curiosity rover request.");
-            }
-
-            return await _marsAPIRepository.GetMarsAPIDataAsync(MarsAPIConstants.CuriosityRoverPath, sol.Value, page, perPage, camera);
+            return await _marsAPIRepository.GetMarsAPIDataAsync(MarsAPIConstants.CuriosityRoverPath, sol, page, perPage, camera);
         }
 
         public async Task<IEnumerable<string>> GetCuriosityRoverImagesAsync(int? sol = null, string? earthDate = null, bool? latest = null, string? size = null, int? page = null, int? perPage = null, string? camera = null)
