@@ -22,22 +22,7 @@ namespace MarsRoverAPI.Services
                 dtEarthDate = DateTime.ParseExact(earthDate, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
             }
 
-            //Get a random sol date if all 3 params have no value
-            if (!sol.HasValue && !dtEarthDate.HasValue && (!latest.HasValue || latest == false))
-            {
-                DateTime curiosityLandDate = DateTime.Parse("2012-08-06T05:17:00Z", null, System.Globalization.DateTimeStyles.RoundtripKind);
-
-                //As of 4/12/2026, Curiosity is still active. 
-                //If it becomes inactive, the current date below will be replaced with the date of its last activity.  
-                DateTime currentDate = DateTime.UtcNow;
-
-                long dateRange = currentDate.Ticks - curiosityLandDate.Ticks;
-                long randomTicks = (long)(Random.Shared.NextDouble() * dateRange);
-                DateTime randomDate = new DateTime(curiosityLandDate.Ticks + randomTicks, DateTimeKind.Utc);
-
-                sol = (int)DateCalculator.CalculateCuriositySol(randomDate);
-            }
-            else if (!sol.HasValue && dtEarthDate.HasValue)
+            if (!sol.HasValue && dtEarthDate.HasValue)
             {
                 sol = (int)DateCalculator.CalculateCuriositySol(dtEarthDate.Value);
             }

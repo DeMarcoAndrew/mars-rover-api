@@ -12,7 +12,7 @@ namespace MarsRoverAPI.Repositories
             _httpClient = httpClientFactory.CreateClient("MarsAPI");
         }
 
-        public async Task<T> GetMarsAPIDataAsync(string apiPath, int sol, int? page = null, int? per_page = null, string? camera = null)
+        public async Task<T> GetMarsAPIDataAsync(string apiPath, int? sol, int? page = null, int? per_page = null, string? camera = null)
         {
             try
             {
@@ -22,9 +22,9 @@ namespace MarsRoverAPI.Repositories
 
                 bool isPerseveranceOrIngenuity = apiPath.Contains("category=mars2020", StringComparison.OrdinalIgnoreCase) || apiPath.Contains("category=ingenuity", StringComparison.OrdinalIgnoreCase);
 
-                if (isPerseveranceOrIngenuity)
+                if (isPerseveranceOrIngenuity && sol.HasValue)
                 {
-                    queryParams.Add($"&condition_2={sol}:sol:gte&condition_3={sol}:sol:lte&");
+                    queryParams.Add($"condition_2={sol}:sol:gte&condition_3={sol}:sol:lte&");
 
                     if (per_page.HasValue)
                     {
@@ -33,9 +33,10 @@ namespace MarsRoverAPI.Repositories
                         queryParams.Add($"page={page ?? 0}");
                     }
 
-                } else
+                }
+                else if (sol.HasValue)
                 {
-                    queryParams.Add($"&sol={sol}");
+                    queryParams.Add($"condition_2={sol}%3Asol%3Agte&condition_3={sol}%3Asol%3Alte");
     
                     if (per_page.HasValue)
                     {
