@@ -24,20 +24,7 @@ namespace MarsRoverAPI.Services
 
             if (!sol.HasValue && dtEarthDate.HasValue)
             {
-                sol = (int)DateCalculator.CalculatePerseveranceSol(dtEarthDate.Value);
-            }
-            else if (!sol.HasValue && latest.HasValue && latest == true)
-            {
-                var latestData = await _marsAPIRepository.GetLatestPerseveranceRoverSolsAsync();
-                if (latestData != null && latestData.LatestSols != null && latestData.LatestSols.Count > 0)
-                {
-                    sol = latestData.LatestSols.Max();
-                }
-            }
-
-            if (!sol.HasValue)
-            {
-                throw new InvalidOperationException("Unable to determine 'sol' value for Perseverance rover request.");
+                sol = (int)DateCalculator.CalculateIngenuitySol(dtEarthDate.Value);
             }
 
             return await _marsAPIRepository.GetMarsAPIDataAsync(MarsAPIConstants.IngenuityHelicopterPath, sol.Value, page, perPage, camera);

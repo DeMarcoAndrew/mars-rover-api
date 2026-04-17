@@ -35,11 +35,6 @@ namespace MarsRoverAPI.Services
                 }
             }
 
-            if (!sol.HasValue)
-            {
-                throw new InvalidOperationException("Unable to determine 'sol' value for Perseverance rover request.");
-            }
-
             return await _marsAPIRepository.GetMarsAPIDataAsync(MarsAPIConstants.PerseveranceRoverPath, sol.Value, page, perPage, camera);
         }
 
