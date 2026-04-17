@@ -1,5 +1,5 @@
 using MarsRoverAPI.Models.CuriosityRover;
-using MarsRoverAPI.Models.PerseveranceRover;
+using MarsRoverAPI.Models.PerseveranceRoverAndIngenuityHelicopter;
 
 namespace MarsRoverAPI.Repositories
 {
@@ -74,15 +74,15 @@ namespace MarsRoverAPI.Repositories
             }
         }
 
-        public async Task<Models.PerseveranceRover.LatestDataRoot> GetLatestPerseveranceRoverSolsAsync()
+        public async Task<Models.PerseveranceRoverAndIngenuityHelicopter.LatestDataRoot> GetLatestPerseveranceRoverSolsAsync()
         {
             try
             {
-                return await _httpClient.GetFromJsonAsync<Models.PerseveranceRover.LatestDataRoot>(MarsAPIConstants.PerseveranceRoverPath) ?? throw new Exception();
+                return await _httpClient.GetFromJsonAsync<Models.PerseveranceRoverAndIngenuityHelicopter.LatestDataRoot>(MarsAPIConstants.PerseveranceRoverPath) ?? throw new Exception();
             }
             catch (Exception)
             {
-                return new Models.PerseveranceRover.LatestDataRoot();
+                return new Models.PerseveranceRoverAndIngenuityHelicopter.LatestDataRoot();
             }
         }
     }

@@ -4,16 +4,16 @@ using MarsRoverAPI.Repositories;
 
 namespace MarsRoverAPI.Services
 {
-    public class PerseveranceRoverService : IPerseveranceRoverService
+    public class IngenuityHelicopterService : IIngenuityHelicopterService
     {
-        private IMarsAPIRepository<PerseveranceRoot> _marsAPIRepository;
+        private IMarsAPIRepository<IngenuityRoot> _marsAPIRepository;
 
-        public PerseveranceRoverService(IMarsAPIRepository<PerseveranceRoot> marsAPIRepository)
+        public IngenuityHelicopterService(IMarsAPIRepository<IngenuityRoot> marsAPIRepository)
         {
             _marsAPIRepository = marsAPIRepository;
         }
 
-        public async Task<PerseveranceRoot> GetPerseveranceRoverDataAsync(int? sol = null, string? earthDate = null, bool? latest = null, int? page = null, int? perPage = null, string? camera = null)
+        public async Task<IngenuityRoot> GetIngenuityHelicopterDataAsync(int? sol = null, string? earthDate = null, bool? latest = null, int? page = null, int? perPage = null, string? camera = null)
         {
             DateTime? dtEarthDate = null;
 
@@ -40,12 +40,12 @@ namespace MarsRoverAPI.Services
                 throw new InvalidOperationException("Unable to determine 'sol' value for Perseverance rover request.");
             }
 
-            return await _marsAPIRepository.GetMarsAPIDataAsync(MarsAPIConstants.PerseveranceRoverPath, sol.Value, page, perPage, camera);
+            return await _marsAPIRepository.GetMarsAPIDataAsync(MarsAPIConstants.IngenuityHelicopterPath, sol.Value, page, perPage, camera);
         }
 
-        public async Task<IEnumerable<string>> GetPerseveranceRoverImagesAsync(int? sol = null, string? earthDate = null, bool? latest = null, string? size = null, int? page = null, int? perPage = null, string? camera = null)
+        public async Task<IEnumerable<string>> GetIngenuityHelicopterImagesAsync(int? sol = null, string? earthDate = null, bool? latest = null, string? size = null, int? page = null, int? perPage = null, string? camera = null)
         {
-            var result = await GetPerseveranceRoverDataAsync(sol, earthDate, latest, page, perPage, camera);
+            var result = await GetIngenuityHelicopterDataAsync(sol, earthDate, latest, page, perPage, camera);
 
             if (result != null && result.Images != null)
             {

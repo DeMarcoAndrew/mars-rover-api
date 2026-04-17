@@ -1,5 +1,5 @@
 using MarsRoverAPI.Models.CuriosityRover;
-using MarsRoverAPI.Models.PerseveranceRover;
+using MarsRoverAPI.Models.PerseveranceRoverAndIngenuityHelicopter;
 
 namespace MarsRoverAPI.Repositories
 {
@@ -9,7 +9,7 @@ namespace MarsRoverAPI.Repositories
 
         public Task<Models.CuriosityRover.LatestDataRoot> GetLatestCuriosityRoverSolsAsync();
 
-        public Task<Models.PerseveranceRover.LatestDataRoot> GetLatestPerseveranceRoverSolsAsync();
+        public Task<Models.PerseveranceRoverAndIngenuityHelicopter.LatestDataRoot> GetLatestPerseveranceRoverSolsAsync();
 
     }
 }

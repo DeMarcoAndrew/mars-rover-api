@@ -39,7 +39,7 @@ namespace MarsRoverAPI.Services
             return await _marsAPIRepository.GetMarsAPIDataAsync(MarsAPIConstants.CuriosityRoverPath, sol, page, perPage, camera);
         }
 
-        public async Task<IEnumerable<string>> GetCuriosityRoverImagesAsync(int? sol = null, string? earthDate = null, bool? latest = null, string? size = null, int? page = null, int? perPage = null, string? camera = null)
+        public async Task<IEnumerable<string>> GetCuriosityRoverImagesAsync(int? sol = null, string? earthDate = null, bool? latest = null, int? page = null, int? perPage = null, string? camera = null)
         {
             var result = await GetCuriosityRoverDataAsync(sol, earthDate, latest, page, perPage, camera);
 

@@ -1,9 +1,12 @@
 using System.Text.Json.Serialization;
 
-namespace MarsRoverAPI.ModelBase.Models
+namespace MarsRoverAPI.Models.PerseveranceRoverAndIngenuityHelicopter
 {
-    public class ImageBase<T, T1>
+    public class Image
     {
+        [JsonPropertyName("extended")]
+        public Extended? Extended { get; set; }
+
         [JsonPropertyName("sol")]
         public int? Sol { get; set; }
 
@@ -11,13 +14,13 @@ namespace MarsRoverAPI.ModelBase.Models
         public string? Attitude { get; set; }
 
         [JsonPropertyName("image_files")]
-        public T? ImageFiles { get; set; }
+        public ImageFiles? ImageFiles { get; set; }
 
         [JsonPropertyName("imageid")]
         public string? ImageId { get; set; }
 
         [JsonPropertyName("camera")]
-        public T1? Camera { get; set; }
+        public Camera? Camera { get; set; }
 
         [JsonPropertyName("caption")]
         public string? Caption { get; set; }
@@ -45,6 +48,9 @@ namespace MarsRoverAPI.ModelBase.Models
 
         [JsonPropertyName("title")]
         public string? Title { get; set; }
+
+        [JsonPropertyName("site")]
+        public int? Site { get; set; }
 
         [JsonPropertyName("date_received")]
         public DateTime? DateReceived { get; set; }

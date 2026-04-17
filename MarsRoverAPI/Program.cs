@@ -18,6 +18,8 @@ builder.Services.AddScoped(typeof(IMarsAPIRepository<>), typeof(MarsAPIRepositor
 
 builder.Services.AddScoped<ICuriosityRoverService, CuriosityRoverService>();
 builder.Services.AddScoped<IPerseveranceRoverService, PerseveranceRoverService>();
+builder.Services.AddScoped<IInSightLanderService, InSightLanderService>();
+builder.Services.AddScoped<IIngenuityHelicopterService, IngenuityHelicopterService>();
 
 var app = builder.Build();
 

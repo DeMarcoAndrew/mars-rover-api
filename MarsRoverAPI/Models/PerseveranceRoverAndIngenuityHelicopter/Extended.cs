@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace MarsRoverAPI.Models.PerseveranceRover
+namespace MarsRoverAPI.Models.PerseveranceRoverAndIngenuityHelicopter
 {
         public class Extended
     {

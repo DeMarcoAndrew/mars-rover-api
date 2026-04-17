@@ -1,14 +1,14 @@
 using System.Text.Json.Serialization;
 
-namespace MarsRoverAPI.ModelBase.Models
+namespace MarsRoverAPI.Models.PerseveranceRoverAndIngenuityHelicopter
 {
-    public class RootBase<T>
+    public class PerseveranceRoot
     {
         [JsonPropertyName("sol")]
         public int? Sol { get; set; }
 
         [JsonPropertyName("images")]
-        public List<T?>? Images { get; set; }
+        public List<Image?>? Images { get; set; }
 
         [JsonPropertyName("num_images")]
         public int? NumImages { get; set; }

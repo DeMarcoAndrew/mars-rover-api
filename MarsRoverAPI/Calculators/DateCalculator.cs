@@ -33,5 +33,16 @@ namespace MarsRoverAPI.Calculators
                    
             return Math.Floor(solCount + 1);
         }
+
+        public static double CalculateInSightSol(DateTime utcDateTime)
+        {
+            double msd = GetMarsSolDate(utcDateTime);
+            
+            // Subtract InSight landing
+            double curiosityLandingMSD = 51511.0;
+            double solCount = msd - curiosityLandingMSD;
+            
+            return Math.Floor(solCount + 1);
+        }
     }
 }
