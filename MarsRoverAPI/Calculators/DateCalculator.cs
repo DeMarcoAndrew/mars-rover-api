@@ -36,9 +36,7 @@ namespace MarsRoverAPI.Calculators
 
         public static double CalculateInSightSol(DateTime utcDateTime)
         {
-            DateTime temp = new DateTime(2018, 11, 26, 20, 0, 0, DateTimeKind.Utc);
-
-            double msd = GetMarsSolDate(temp);
+            double msd = GetMarsSolDate(utcDateTime);
             
             // Subtract InSight landing
             double inSightLandingMSD = 51511;
@@ -49,13 +47,11 @@ namespace MarsRoverAPI.Calculators
 
         public static double CalculateIngenuitySol(DateTime utcDateTime)
         {
-
-            DateTime temp = new DateTime(2021, 4, 19, 7, 34, 0, DateTimeKind.Utc);
-            double msd = GetMarsSolDate(temp);
+            double msd = GetMarsSolDate(utcDateTime);
             
-            // Subtract Ingenuity landing
-            double ingenuityLandingMSD = 52362;
-            double solCount = msd - ingenuityLandingMSD;
+            // Subtract Ingenuity first photo
+            double ingenuityFirstPhotoMSD = 52362;
+            double solCount = msd - ingenuityFirstPhotoMSD;
             
             return Math.Floor(solCount + 1);
         }
