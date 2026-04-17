@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MarsRoverAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/curiosity")]
     [ApiController]
     public class CuriosityController : ControllerBase
     {
@@ -16,10 +16,10 @@ namespace MarsRoverAPI.Controllers
             _curiosityRoverService = p_CuriosityRoverService;
         }
  
-        [HttpGet("curiosity")]
-        [HttpGet("curiosity/{sol:int}")]
-        [HttpGet("curiosity/{earth_date}")]
-        [HttpGet("curiosity/latest")]
+        [HttpGet("")]
+        [HttpGet("{sol:int}")]
+        [HttpGet("{earth_date}")]
+        [HttpGet("/latest")]
         public async Task<IActionResult> GetCuriosityRoverData(
             [FromRoute] int? sol = null,
             [FromRoute] string? earth_date = null,
@@ -45,10 +45,10 @@ namespace MarsRoverAPI.Controllers
             }
         }
 
-        [HttpGet("curiosity/images")]
-        [HttpGet("curiosity/{sol:int}/images")]
-        [HttpGet("curiosity/{earth_date}/images")]
-        [HttpGet("curiosity/images/latest")]
+        [HttpGet("/images")]
+        [HttpGet("{sol:int}/images")]
+        [HttpGet("{earth_date}/images")]
+        [HttpGet("images/latest")]
         public async Task<IActionResult> GetCuriosityRoverImages(
             [FromRoute] int? sol = null,
             [FromRoute] string? earth_date = null,

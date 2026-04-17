@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MarsRoverAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/perseverance")]
     [ApiController]
     public class PerseveranceController : ControllerBase
     {
@@ -16,9 +16,9 @@ namespace MarsRoverAPI.Controllers
         }
 
         [HttpGet("perseverance")]
-        [HttpGet("perseverance/{sol:int}")]
-        [HttpGet("perseverance/{earth_date}")]
-        [HttpGet("perseverance/latest")]
+        [HttpGet("{sol:int}")]
+        [HttpGet("{earth_date}")]
+        [HttpGet("latest")]
         public async Task<IActionResult> GetPerseveranceRoverData(
             [FromRoute] int? sol = null,
             [FromRoute] string? earth_date = null,
@@ -44,10 +44,10 @@ namespace MarsRoverAPI.Controllers
             }
         }
 
-        [HttpGet("perseverance/images")]
-        [HttpGet("perseverance/{sol:int}/images")]
-        [HttpGet("perseverance/{earth_date}/images")]
-        [HttpGet("perseverance/images/latest")]
+        [HttpGet("images")]
+        [HttpGet("{sol:int}/images")]
+        [HttpGet("{earth_date}/images")]
+        [HttpGet("images/latest")]
         public async Task<IActionResult> GetPerseveranceRoverImages(
             [FromRoute] int? sol = null,
             [FromRoute] string? earth_date = null,

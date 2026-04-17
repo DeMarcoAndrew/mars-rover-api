@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MarsRoverAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/ingenuity")]
     [ApiController]
     public class IngenuityController : ControllerBase
     {
@@ -15,10 +15,10 @@ namespace MarsRoverAPI.Controllers
             _ingenuityHelicopterService = p_IngenuityHelicopterService;
         }
 
-        [HttpGet("ingenuity")]
-        [HttpGet("ingenuity/{sol:int}")]
-        [HttpGet("ingenuity/{earth_date}")]
-        [HttpGet("ingenuity/latest")]
+        [HttpGet("")]
+        [HttpGet("{sol:int}")]
+        [HttpGet("{earth_date}")]
+        [HttpGet("latest")]
         public async Task<IActionResult> GetIngenuityHelicopterDataAsync(
             [FromRoute] int? sol = null,
             [FromRoute] string? earth_date = null,
@@ -44,10 +44,10 @@ namespace MarsRoverAPI.Controllers
             }
         }
 
-        [HttpGet("ingenuity/images")]
-        [HttpGet("ingenuity/{sol:int}/images")]
-        [HttpGet("ingenuity/{earth_date}/images")]
-        [HttpGet("ingenuity/images/latest")]
+        [HttpGet("images")]
+        [HttpGet("{sol:int}/images")]
+        [HttpGet("{earth_date}/images")]
+        [HttpGet("images/latest")]
         public async Task<IActionResult> GetIngenuityHelicopterImages(
             [FromRoute] int? sol = null,
             [FromRoute] string? earth_date = null,

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MarsRoverAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/insight")]
     [ApiController]
     public class InSightController : ControllerBase
     {
@@ -15,9 +15,9 @@ namespace MarsRoverAPI.Controllers
             _inSightLanderService = p_InSightLanderService;
         }
 
-        [HttpGet("insight")]
-        [HttpGet("insight/{sol:int}")]
-        [HttpGet("insight/{earth_date}")]
+        [HttpGet("")]
+        [HttpGet("{sol:int}")]
+        [HttpGet("{earth_date}")]
         public async Task<IActionResult> GetInSightLanderData(
             [FromRoute] int? sol = null,
             [FromRoute] string? earth_date = null,
@@ -37,9 +37,9 @@ namespace MarsRoverAPI.Controllers
         }
 
 
-        [HttpGet("insight/images")]
-        [HttpGet("insight/{sol:int}/images")]
-        [HttpGet("insight/{earth_date}/images")]
+        [HttpGet("images")]
+        [HttpGet("{sol:int}/images")]
+        [HttpGet("{earth_date}/images")]
         public async Task<IActionResult> GetInSightLanderImages(
             [FromRoute] int? sol = null,
             [FromRoute] string? earth_date = null,
