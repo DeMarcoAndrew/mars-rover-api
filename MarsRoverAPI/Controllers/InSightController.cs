@@ -52,7 +52,7 @@ namespace MarsRoverAPI.Controllers
             {
                 var result = await _inSightLanderService.GetInSightLanderImagesAsync(sol, earth_date, page, per_page, camera);
 
-                return per_page == 1 && result.Count() > 0 ? Ok(result.First()) : Ok(result);
+                return per_page == 1 && result.Count() > 0 ? Ok(result.OrderBy(x => Random.Shared.Next()).First()) : Ok(result);
             }
             catch (Exception ex)
             {
