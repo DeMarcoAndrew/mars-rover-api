@@ -47,7 +47,7 @@ Query types are listed below, but all query params on this API are nullable.
 | example | ?page=2                    | ?per_page=25    | ?camera=FHAZ_RIGHT_A <br> ?camera=FHAZ_LEFT_A&#124;FHAZ_LEFT_B                                       |
 | *Note   | must be used with per_page |                 | querying multiple cameras can be done by separating <br> each camera with the pipe character: &#124; |
 
-### Cameras <br>
+# Cameras <br>
 Each Rover has a set of cameras you can use to filter your search. Below is a table with the Camera and the abbreviation you will use for the API: <br>
 
 #### Curiosity Rover: <br>
