@@ -54,7 +54,7 @@ namespace MarsRoverAPI.Services
                     "small" => validResults.Select(img => img?.Small).OfType<string>().ToList(),
                     "medium" => validResults.Select(img => img?.Small).OfType<string>().ToList(),
                     "large" => validResults.Select(img => img?.Small).OfType<string>().ToList(),
-                    _ => validResults.Select(img => img?.Small).OfType<string>().ToList()
+                    _ => validResults.Select(img => img?.FullRes).OfType<string>().ToList()
                 };
 
                 return imagesOnlyResult;
