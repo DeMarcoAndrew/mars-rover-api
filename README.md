@@ -15,7 +15,7 @@ and latest (only for Curiosity and Perseverance becuase those are still running 
 #### Earth Date: /api/perseverance/2026-04-20 -> Grabs data for Perseverance rover on Earth Date 20 April 2024 <br>
 #### Latest: /api/curiosity/latest -> Grabs data from latest SOL for Curiosity rover (once again, only works for curiosity and perseverance since they aren't retired) <br>
 
-### Grabbing Images Only
+# Grabbing Images Only
 If you wish to only use the images in your project and you don't want to create models for all of the extra information that comes along with the main api path, you can add /images to the end of your path. These will come in a single string or list of strings depending on how many items you specify in the paging query.
 
 ##### Examples of this inclue: <br>
