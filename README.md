@@ -41,11 +41,11 @@ Possible Queries for every rover endpoint <br>
 (first one will be ?{query-here}={value-here} and any following ones will be &{next-query-here}={value-here}). <br>
 Query types are listed below, but all query params on this API are nullable. 
 
-|         | Page     | Per Page              | Camera                                                                                               |
-| ------- | -------- | --------------------- | ---------------------------------------------------------------------------------------------------- |
-| Type    | integer  | integer               | string                                                                                               |
-| example | ?page=2  | ?per_page=25          | ?camera=FHAZ_RIGHT_A <br> ?camera=FHAZ_LEFT_A&#124;FHAZ_LEFT_B                                       |
-| *Note   | *Note must be used with per_page | querying multiple cameras can be done by separating <br> each camera with the pipe character: &#124; |
+|         | Page     | Per Page        | Camera                                                                                               |
+| ------- | -------- | ----------------| ---------------------------------------------------------------------------------------------------- |
+| Type    | integer  | integer         | string                                                                                               |
+| example | ?page=2  | ?per_page=25    | ?camera=FHAZ_RIGHT_A <br> ?camera=FHAZ_LEFT_A&#124;FHAZ_LEFT_B                                       |
+| *Note   | must be used with per_page | querying multiple cameras can be done by separating <br> each camera with the pipe character: &#124; |
 
 ### Cameras <br>
 Each Rover has a set of cameras you can use to filter your search. Below is a table with the Camera and the abbreviation you will use for the API: <br>
