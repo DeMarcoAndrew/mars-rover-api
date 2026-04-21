@@ -35,7 +35,7 @@ Possible Queries for every rover endpoint
 | Page                             | Per Page                  | Camera                                                                                           |
 | -------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------ |
 | integer                          | integer                   | string                                                                                           |
-| ex: ?page=2                      | ex: ?per_page=25               | ex: ?camera=FHAZ_RIGHT_A                                                                    |
+| example: ?page=2                 | example: \n ?per_page=25  | ex: ?camera=FHAZ_RIGHT_A                                                                         |
 | *Note must be used with per_page |                           | querying multiple cameras can be done by separating each camera with the pipe character: & #124; |
 
 Cameras
