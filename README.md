@@ -33,10 +33,10 @@ Example of size query: /api/perseverance/images?per_page=1&size=large -> returns
 
 Possible Queries for every rover endpoint
 | Page                             | Per Page                  | Camera                                                                                           |
-| -------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------ |
-| integer                          | integer                   | string                                                                                           |
-| example: ?page=2                 | example: \n ?per_page=25  | ex: ?camera=FHAZ_RIGHT_A                                                                         |
-| *Note must be used with per_page |                           | querying multiple cameras can be done by separating each camera with the pipe character: & #124; |
+| -------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------ |
+| integer                          | integer                    | string                                                                                           |
+| example: ?page=2                 | example: <br> ?per_page=25 | ex: ?camera=FHAZ_RIGHT_A                                                                       |
+| *Note must be used with per_page |                            | querying multiple cameras can be done by separating each camera with the pipe character: & #124; |
 
 Cameras
 TODO ADD in camera filtering for each rover
