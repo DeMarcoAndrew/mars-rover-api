@@ -27,7 +27,7 @@ namespace MarsRoverAPI.Services
                 sol = (int)DateCalculator.CalculateIngenuitySol(dtEarthDate.Value);
             }
 
-            return await _marsAPIRepository.GetMarsAPIDataAsync(MarsAPIConstants.IngenuityHelicopterPath, sol.Value, page, perPage, camera);
+            return await _marsAPIRepository.GetMarsAPIDataAsync(MarsAPIConstants.IngenuityHelicopterPath, sol, page, perPage, camera);
         }
 
         public async Task<IEnumerable<string>> GetIngenuityHelicopterImagesAsync(int? sol = null, string? earthDate = null, string? size = null, int? page = null, int? perPage = null, string? camera = null)

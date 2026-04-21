@@ -25,26 +25,23 @@ namespace MarsRoverAPI.Repositories
                 if (isPerseveranceOrIngenuity && sol.HasValue)
                 {
                     queryParams.Add($"condition_2={sol}:sol:gte&condition_3={sol}:sol:lte&");
-
-                    if (per_page.HasValue)
-                    {
-                        queryParams.Add($"num={per_page.Value}");
-                        
-                        queryParams.Add($"page={page ?? 0}");
-                    }
-
                 }
                 else if (sol.HasValue)
                 {
                     queryParams.Add($"condition_2={sol}%3Asol%3Agte&condition_3={sol}%3Asol%3Alte");
-    
-                    if (per_page.HasValue)
-                    {
-                        queryParams.Add($"per_page={per_page.Value}");
-                        
-                        queryParams.Add($"page={page ?? 0}");
-                    }
+                }
 
+                if (isPerseveranceOrIngenuity && per_page.HasValue)
+                {
+                    queryParams.Add($"num={per_page.Value}");
+
+                    queryParams.Add($"page={page ?? 0}");
+                }
+                else if (per_page.HasValue)
+                {
+                    queryParams.Add($"per_page={per_page.Value}");
+                    
+                    queryParams.Add($"page={page ?? 0}");
                 }
 
                 if (!string.IsNullOrWhiteSpace(camera))

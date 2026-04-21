@@ -15,7 +15,7 @@ namespace MarsRoverAPI.Controllers
             _perseveranceRoverService = p_PerseveranceRoverService;
         }
 
-        [HttpGet("perseverance")]
+        [HttpGet("")]
         [HttpGet("{sol:int}")]
         [HttpGet("{earth_date}")]
         [HttpGet("latest")]

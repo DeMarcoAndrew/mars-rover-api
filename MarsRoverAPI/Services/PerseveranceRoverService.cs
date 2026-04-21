@@ -35,7 +35,7 @@ namespace MarsRoverAPI.Services
                 }
             }
 
-            return await _marsAPIRepository.GetMarsAPIDataAsync(MarsAPIConstants.PerseveranceRoverPath, sol.Value, page, perPage, camera);
+            return await _marsAPIRepository.GetMarsAPIDataAsync(MarsAPIConstants.PerseveranceRoverPath, sol, page, perPage, camera);
         }
 
         public async Task<IEnumerable<string>> GetPerseveranceRoverImagesAsync(int? sol = null, string? earthDate = null, bool? latest = null, string? size = null, int? page = null, int? perPage = null, string? camera = null)
