@@ -19,7 +19,7 @@ namespace MarsRoverAPI.Controllers
         [HttpGet("")]
         [HttpGet("{sol:int}")]
         [HttpGet("{earth_date}")]
-        [HttpGet("/latest")]
+        [HttpGet("latest")]
         public async Task<IActionResult> GetCuriosityRoverData(
             [FromRoute] int? sol = null,
             [FromRoute] string? earth_date = null,
@@ -45,7 +45,7 @@ namespace MarsRoverAPI.Controllers
             }
         }
 
-        [HttpGet("/images")]
+        [HttpGet("images")]
         [HttpGet("{sol:int}/images")]
         [HttpGet("{earth_date}/images")]
         [HttpGet("images/latest")]
