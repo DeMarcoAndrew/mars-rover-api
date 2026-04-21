@@ -31,7 +31,9 @@ Example for a singe string return type: /api/perseverance/182/images?per_page=1 
 In addition, the Perseverance and Ingenuity endpoints can have a size query of small, medium, or large. The default if no size is specified will be NASA's Full Resolution photo url.
 Example of size query: /api/perseverance/images?per_page=1&size=large -> returns a single string url link for a large image taken by perseverance rover. 
 
-Possible Queries for every rover endpoint (first one will be ?{query-here}={value-here} and any following ones will be &{next-query-here}={value-here}
+Possible Queries for every rover endpoint ( first one will be ?{query-here}={value-here} and 
+any following ones will be &{next-query-here}={value-here} )
+
 | Page                             | Per Page                     | Camera                                                                                               |
 | -------------------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------- |
 | integer                          | integer                      | string                                                                                               |
