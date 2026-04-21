@@ -10,7 +10,7 @@ Acceptable {rover-name}: curiosity, perseverance, insight, ingenuity
 Each endpoint will work by just using that base url above, but you can also query by sol, earth date in the form of "yyyy-MM-dd", 
 and latest (only for Curiosity and Perseverance becuase those are still running as of 21 April 2026). 
 
-### Below are example paths for each endpoint: <br>
+# Example Paths
 #### SOL: /api/curiosity/176 -> Grabs data from sol date 176 of the Curiosity rover's mission <br>
 #### Earth Date: /api/perseverance/2026-04-20 -> Grabs data for Perseverance rover on Earth Date 20 April 2024 <br>
 #### Latest: /api/curiosity/latest -> Grabs data from latest SOL for Curiosity rover (once again, only works for curiosity and perseverance since they aren't retired) <br>
