@@ -32,11 +32,11 @@ In addition, the Perseverance and Ingenuity endpoints can have a size query of s
 Example of size query: /api/perseverance/images?per_page=1&size=large -> returns a single string url link for a large image taken by perseverance rover. 
 
 Possible Queries for every rover endpoint
-| Page                             | Per Page                   | Camera                                                                                           |
-| -------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------ |
-| integer                          | integer                    | string                                                                                           |
-| example: ?page=2                 | example: <br> ?per_page=25 | ex: ?camera=FHAZ_RIGHT_A                                                                         |
-| *Note must be used with per_page |                            | querying multiple cameras can be done by separating each camera with the pipe character: & #124; |
+| Page                             | Per Page                     | Camera                                                                                               |
+| -------------------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------- |
+| integer                          | integer                      | string                                                                                               |
+| example: ?page=2                 | example: <br> ?per_page=25   | ex: ?camera=FHAZ_RIGHT_A                                                                             |
+| *Note must be used with per_page |                              | querying multiple cameras can be done by separating <br> each camera with the pipe character: &#124; |
 
 Cameras
 TODO ADD in camera filtering for each rover
