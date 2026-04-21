@@ -80,11 +80,17 @@ Perseverance Rover: <br>
 | Rover Down-Look Camera           | EDL_RDCAM                                      |
 | Lander Vision System Camera      | LCAM                                           |
 
+InSight Lander <br>
+| Camera                                   | API Abbreviations |
+| -----------------------------------------| ----------------- |
+| Instrument Deployment Camera (IDC)       | idc               |
+| Instrument Context Camera (ICC)          | icc               |
+
 Ingenuity Helicopter <br>
 | Camera               | API Abbreviations |
 | -------------------- | ----------------- |
-| Navigation Camera    | 7CHELI_NAV        |
-| Color Camera         | 7CHELI_RTE        |
+| Navigation Camera    | HELI_NAV          |
+| Color Camera         | HELI_RTE          |
 
 Contributing
 If you would like to contribute to this Mars Rover API, feel free to create a pull request.
