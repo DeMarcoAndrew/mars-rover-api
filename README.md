@@ -26,6 +26,7 @@ If you wish to only use the images in your project and you don't want to create 
 
 For the image endpoints above, if you specify the per_page query to 1, it will return a single string url, otherwise it will return a list of strings []. <br>
 This per_page query can be added on to any of the endpoints mentioned above. You can also specify different numbers for this query which will change the number of results that come back. <br>
+
 *Note some endpoints may have a minmum of 10-15 results, but all endpoints will work with the value 1. To clarify this, /image?per_page=1 will work for all, but /image?per_page=5 might not work for all endpoints. <br>
 
 Example for a singe string return type: /api/perseverance/182/images?per_page=1 -> returns a string url for an image taken by perseverance rover on sol 182.
