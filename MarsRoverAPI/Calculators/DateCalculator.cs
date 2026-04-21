@@ -12,48 +12,42 @@ namespace MarsRoverAPI.Calculators
             return ((modifiedJulianDate - 51549.5) / 1.02749125) + 44796.0 - 0.0009626;
         }
 
-        public static double CalculateCuriositySol(DateTime utcDateTime)
+        public static double CalculateSolForRover(DateTime utcDateTime, double roverLandingSol)
         {
             double msd = GetMarsSolDate(utcDateTime);
             
-            // Subtract Curiosity landing
-            double curiosityLandingMSD = 49269.0;
-            double solCount = msd - curiosityLandingMSD;
+            // Subtract landing sol
+            double solCount = msd - roverLandingSol;
             
             return Math.Floor(solCount + 1);
+        }
+
+        /// <summary>
+        /// For the Methods below, the roverLanding sols were gotten 
+        /// by using the calculations in the GetMarsSolDate method with 
+        /// the rover landing date in UTC time and then rounding it to the nearest whole number.
+        /// </summary>
+        /// <param name="utcDateTime"></param>
+        /// <returns>SOL for that rover. Ex: Curiosity landed at August 6, 2012, at 05:17 UTC, which would be SOL 0 </returns>
+
+        public static double CalculateCuriositySol(DateTime utcDateTime)
+        {
+            return CalculateSolForRover(utcDateTime, 49269);
         }
 
         public static double CalculatePerseveranceSol(DateTime utcDateTime)
         {
-            double msd = GetMarsSolDate(utcDateTime);
-            
-            // Subtract Perseverance landing
-            double perseveranceLandingMSD = 52304;
-            double solCount = msd - perseveranceLandingMSD;
-                   
-            return Math.Floor(solCount + 1);
+            return CalculateSolForRover(utcDateTime, 52304);
         }
 
         public static double CalculateInSightSol(DateTime utcDateTime)
         {
-            double msd = GetMarsSolDate(utcDateTime);
-            
-            // Subtract InSight landing
-            double inSightLandingMSD = 51511;
-            double solCount = msd - inSightLandingMSD;
-            
-            return Math.Floor(solCount + 1);
+            return CalculateSolForRover(utcDateTime, 51511);
         }
 
         public static double CalculateIngenuitySol(DateTime utcDateTime)
         {
-            double msd = GetMarsSolDate(utcDateTime);
-            
-            // Subtract Ingenuity first photo
-            double ingenuityFirstPhotoMSD = 52362;
-            double solCount = msd - ingenuityFirstPhotoMSD;
-            
-            return Math.Floor(solCount + 1);
+            return CalculateSolForRover(utcDateTime, 52304);
         }
     }
 }

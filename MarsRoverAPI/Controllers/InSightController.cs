@@ -28,7 +28,7 @@ namespace MarsRoverAPI.Controllers
         {
             try
             {
-                return Ok(await _inSightLanderService.GetInSightLanderImagesAsync(sol, earth_date, page, per_page, camera));
+                return Ok(await _inSightLanderService.GetInSightLanderDataAsync(sol, earth_date, page, per_page, camera));
             }
             catch (Exception ex)
             {
