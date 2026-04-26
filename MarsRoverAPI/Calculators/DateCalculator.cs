@@ -12,7 +12,7 @@ namespace MarsRoverAPI.Calculators
             return ((modifiedJulianDate - 51549.5) / 1.02749125) + 44796.0 - 0.0009626;
         }
 
-        public static double CalculateSolForRover(DateTime utcDateTime, double roverLandingSol)
+        private static double CalculateSolForRover(DateTime utcDateTime, double roverLandingSol)
         {
             double msd = GetMarsSolDate(utcDateTime);
             
